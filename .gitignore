@@ -1,0 +1,87 @@
+# Dependencies
+node_modules/
+**/node_modules/
+jspm_packages/
+.pnp/
+.pnp.js
+
+# Environment Variables
+.env
+.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+!.env.example
+**/ .env
+**/ .env.*
+!**/ .env.example
+
+# Build Output
+dist/
+**/dist/
+build/
+**/build/
+.next/
+out/
+coverage/
+dist-ssr/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+server/server.log
+
+# Cache
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+.tmp/
+temp/
+
+# Runtime Data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Database
+*.sqlite
+*.db
+
+# Supabase Local
+.supabase/
+
+# OS Files
+.DS_Store
+Thumbs.db
+**/ .DS_Store
+
+# IDE / Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# TypeScript
+*.tsbuildinfo
+
+# Deployment
+.vercel
+.netlify
+.cloudflare
+
+# Misc
+*.tgz
+*.tar.gz
+*.zip
+ *.local

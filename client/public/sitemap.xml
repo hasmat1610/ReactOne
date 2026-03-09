@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>/</loc></url>
+  <url><loc>/stitch-guide</loc></url>
+  <url><loc>/google-auth</loc></url>
+  <url><loc>/auth-flow-code</loc></url>
+  <url><loc>/figma-mcp</loc></url>
+  <url><loc>/axios-react</loc></url>
+  <url><loc>/tanstack-query</loc></url>
+  <url><loc>/redux-toolkit</loc></url>
+  <url><loc>/zustand</loc></url>
+  <url><loc>/react-query</loc></url>
+  <url><loc>/react-hook-form</loc></url>
+  <url><loc>/formik</loc></url>
+  <url><loc>/backend-integration</loc></url>
+  <url><loc>/gen-code-lab</loc></url>
+  <url><loc>/login</loc></url>
+  <url><loc>/signup</loc></url>
+</urlset>
+
