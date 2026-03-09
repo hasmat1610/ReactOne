@@ -13,9 +13,9 @@ jspm_packages/
 .env.test.local
 .env.production.local
 !.env.example
-**/ .env
-**/ .env.*
-!**/ .env.example
+**/.env
+**/.env.*
+!**/.env.example
 
 # Build Output
 dist/
@@ -60,7 +60,7 @@ pids
 # OS Files
 .DS_Store
 Thumbs.db
-**/ .DS_Store
+**/.DS_Store
 
 # IDE / Editors
 .vscode/
@@ -84,4 +84,4 @@ Thumbs.db
 *.tgz
 *.tar.gz
 *.zip
- *.local
+*.local
