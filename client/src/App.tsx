@@ -24,6 +24,8 @@ import NotFound from './pages/NotFound'
 import BackendIntegration from './pages/BackendIntegration'
 import GenCodeLab from './pages/GenCodeLab'
 import SupabaseGuide from './pages/SupabaseGuide'
+import SupabaseMCP from './pages/SupabaseMCP'
+import SupabaseAutomation from './pages/SupabaseAutomation'
 import { getRouteSeo } from './seo/routesSeo'
 import AdminDashboard from './pages/AdminDashboard'
 import { AdminRoute } from './components/auth/AdminRoute'
@@ -76,6 +78,8 @@ function AppContent() {
             <Route path="/backend-integration" element={<BackendIntegration />} />
             <Route path="/gen-code-lab" element={<GenCodeLab />} />
             <Route path="/supabase-guide" element={<SupabaseGuide />} />
+            <Route path="/supabase-mcp" element={<SupabaseMCP />} />
+            <Route path="/supabase-automation" element={<SupabaseAutomation />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

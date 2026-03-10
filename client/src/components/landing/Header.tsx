@@ -6,6 +6,7 @@ import {
   Braces,
   ChevronDown,
   Code,
+  Cpu,
   Database,
   Layers,
   LogOut,
@@ -21,6 +22,7 @@ import {
   User,
   X,
   Zap,
+  Workflow,
   type LucideIcon,
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
@@ -67,7 +69,10 @@ const navMenus: NavMenu[] = [
     icon: Puzzle,
     color: 'from-indigo-400 to-blue-600',
     dotColor: 'bg-indigo-400',
-    items: [{ to: '/figma-mcp', icon: Sparkles, title: 'Figma MCP', desc: 'Figma-to-code AI pipeline' }],
+    items: [
+      { to: '/figma-mcp', icon: Sparkles, title: 'Figma MCP', desc: 'Figma-to-code AI pipeline' },
+      { to: '/supabase-automation', icon: Workflow, title: 'Supabase Automation', desc: 'AI-powered backend workflows' },
+    ],
   },
   {
     label: 'FrontEnd',
@@ -81,10 +86,10 @@ const navMenus: NavMenu[] = [
     icon: Server,
     color: 'from-amber-400 to-orange-500',
     dotColor: 'bg-amber-400',
-    items: [
-      { to: '/backend-integration', icon: Server, title: 'Backend Integration', desc: 'Node.js & Express patterns' },
-      { to: '/supabase-guide', icon: Database, title: 'Supabase Guide', desc: 'Auth, DB & RLS masterclass' },
-    ],
+      items: [
+        { to: '/backend-integration', icon: Server, title: 'Backend Integration', desc: 'Node.js & Express patterns' },
+        { to: '/supabase-guide', icon: Database, title: 'Supabase Guide', desc: 'Auth, DB & RLS masterclass' },
+      ],
   },
   {
     label: 'Library',

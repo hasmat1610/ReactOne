@@ -18,6 +18,16 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/supabase-automation" className="hover:text-white transition-colors">
+                  Supabase Automation
+                </Link>
+              </li>
+              <li>
+                <Link to="/supabase-mcp" className="hover:text-white transition-colors">
+                  Supabase MCP
+                </Link>
+              </li>
+              <li>
                 <Link to="/backend-integration" className="hover:text-white transition-colors">
                   Backend Integration
                 </Link>

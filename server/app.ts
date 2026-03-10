@@ -5,6 +5,7 @@ import express from 'express'
 import path from 'path'
 import authRoutes from './routes/auth'
 import chatRoutes from './routes/chat'
+import postRoutes from './routes/postRoutes'
 
 dotenv.config()
 
@@ -25,6 +26,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET || 'fallback_secret_change_me'))
 
 app.use('/auth', authRoutes)
 app.use('/chat', chatRoutes)
+app.use('/posts', postRoutes)
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console

@@ -15,12 +15,13 @@ ReactOne is a modern, full-stack learning and documentation platform for React d
 - **Components:** [Radix UI](https://www.radix-ui.com/) + [Lucide Icons](https://lucide.dev/)
 - **Animation:** Spline, Aurora, and Sparkles effects.
 
-### Backend (`/server`)
-- **Runtime:** [Node.js](https://nodejs.org/)
+### Backend (`/server` & `/supabase`)
+- **Runtime:** [Node.js](https://nodejs.org/) (v20+)
 - **Framework:** [Express](https://expressjs.com/)
-- **Language:** TypeScript (via `tsx`)
-- **Auth:** [Google OAuth 2.0](https://developers.google.com/identity/protocols/oauth2) & JWT
-- **Database:** [Supabase](https://supabase.com/)
+- **Edge Functions:** [Supabase Edge Functions](https://supabase.com/docs/guides/functions) (Deno)
+- **Email Service:** [Resend](https://resend.com/)
+- **Auth:** Google OAuth 2.0 & Custom Email Verification
+- **Database:** [Supabase (PostgreSQL)](https://supabase.com/)
 
 ---
 
@@ -35,7 +36,9 @@ ReactOne/
 │   ├── routes/      # API Endpoints
 │   ├── controllers/ # Business logic
 │   └── middleware/  # Auth & Security
-├── supabase/        # Database migrations and schema
+├── supabase/        # Supabase Configuration
+│   ├── functions/   # Edge Functions (Signup, Verification, Password Reset)
+│   └── schema.sql   # Database migrations and schema
 └── .gitignore       # Root ignore rules
 ```
 
@@ -44,18 +47,20 @@ ReactOne/
 ## ✨ Key Features
 
 - **Google OAuth Integration:** Secure login using Google accounts.
+- **Advanced Email Auth:** Custom signup flow with email verification via Resend and Supabase Edge Functions.
+- **Supabase MCP:** Agentic backend management guide featuring the Model Context Protocol.
+- **Dynamic Blog System:** PostgreSQL-powered blog with Markdown support and RLS.
 - **Interactive Roadmap:** Guides for Figma to React conversion, Axios, Redux Toolkit, etc.
 - **Modern UI/UX:** High-performance animations and glassmorphic designs.
-- **Supabase Backend:** Real-time database and storage capabilities.
-- **Chatbot UI:** Integrated AI-ready chat interface.
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/) (v18+)
+- [Node.js](https://nodejs.org/) (v20.19+ or v22.12+)
 - [npm](https://www.npmjs.com/)
+- [Supabase CLI](https://supabase.com/docs/guides/cli) (for Edge Functions)
 
 ### 1. Clone the Repository
 ```bash
@@ -63,28 +68,65 @@ git clone https://github.com/hasmat1610/ReactOne.git
 cd ReactOne
 ```
 
+### 🌍 Environment Variable Guide
+
+To run this project, you need to configure several environment variables. Follow these steps to generate them:
+
+#### 1. Google OAuth 2.0 (Auth)
+- Go to the [Google Cloud Console](https://console.cloud.google.com/).
+- Create a new project and navigate to **APIs & Services > Credentials**.
+- Create an **OAuth 2.0 Client ID** (Web Application).
+- Add `http://localhost:3000/auth/google/callback` (for local) and your production URL to **Authorized redirect URIs**.
+- **Result:** `CLIENT_ID`, `CLIENT_SECRET`, and `REDIRECT_URI`.
+
+#### 2. Supabase (Database & Edge Functions)
+- Create a project on [Supabase](https://supabase.com/).
+- Go to **Project Settings > API**.
+- **Result:** `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` (anon key).
+
+#### 3. Resend (Email)
+- Create an account on [Resend](https://resend.com/).
+- Generate an API Key under **API Keys**.
+- **Result:** `RESEND_API_KEY` (Used in Supabase Secrets).
+
+#### 4. Security Secrets (JWT & Cookies)
+Generate secure random strings for your secrets using your terminal:
+```bash
+# Generate a 64-character secret
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
+- **Result:** `JWT_SECRET`, `COOKIE_SECRET`, and `VITE_AUTH_API_KEY`.
+
+---
+
 ### 2. Environment Setup
-Create `.env` files based on the `.env.example` templates provided in both `client` and `server` directories.
 
-**Server (`/server/.env`):**
-```env
-PORT=3000
-CLIENT_ID=your_google_client_id
-CLIENT_SECRET=your_google_client_secret
-JWT_SECRET=your_jwt_secret
-SUPABASE_URL=your_supabase_url
-SUPABASE_KEY=your_supabase_anon_key
+Copy the appropriate template files to create your active `.env` files.
+
+#### **Local Development**
+1. Copy `client/.env.local.example` ➔ `client/.env`
+2. Copy `server/.env.local.example` ➔ `server/.env`
+3. Fill in your local Google OAuth and Supabase credentials.
+
+#### **Production Hosting (Vercel/Render)**
+1. Use `client/.env.production.example` and `server/.env.production.example` as a reference.
+2. Add these variables directly to your hosting provider's (Vercel/Render) dashboard.
+
+#### **Supabase Edge Functions**
+```bash
+# Production keys (Deno)
+supabase secrets set RESEND_API_KEY=re_...
+supabase secrets set PUBLIC_SITE_URL=https://your-domain.vercel.app
 ```
 
-**Client (`/client/.env`):**
-```env
-VITE_SUPABASE_URL=your_supabase_url
-VITE_SUPABASE_PUBLISHABLE_KEY=your_supabase_key
-```
+---
+
+### 3. Deployment Points (Vercel & Render)
+- **Frontend (Vercel):** Add all `client/.env` variables to Vercel's Environment Variables settings.
+- **Backend (Render):** Add all `server/.env` variables to Render's Environment Variables settings.
+- Ensure `FRONTEND_URL` and `REDIRECT_URI` are updated to your production domains.
 
 ### 3. Installation & Development
-
-Available scripts from the root (depending on your task runner) or navigate to subfolders:
 
 #### **Run Server**
 ```bash
@@ -104,7 +146,7 @@ npm run dev
 
 ## 🛡 Security Note
 
-Sensitive credentials and `node_modules` are excluded from Git tracking via a comprehensive root `.gitignore`. Always use `.env.example` to document required environment variables without exposing secrets.
+Sensitive credentials and `node_modules` are excluded from Git tracking. Always use Supabase Secrets for production Edge Function keys.
 
 ---
 
