@@ -10,6 +10,7 @@ const techItems = [
     { name: 'TanStack', color: '#FF4154', bg: 'rgba(255,65,84,0.08)', letter: 'TQ' },
     { name: 'Zod', color: '#3068B7', bg: 'rgba(48,104,183,0.08)', letter: 'Zd' },
     { name: 'RHF', color: '#EC4899', bg: 'rgba(236,72,153,0.08)', letter: 'HF' },
+    { name: 'Supabase', color: '#3ECF8E', bg: 'rgba(62,207,142,1.08)', letter: 'Sb' },
     { name: 'Figma', color: '#A259FF', bg: 'rgba(162,89,255,0.08)', letter: 'Fi' },
 ];
 

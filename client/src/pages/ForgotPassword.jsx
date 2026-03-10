@@ -11,7 +11,7 @@ const forgotPasswordSchema = z.object({
 
 const ForgotPassword = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
-  
+
   const {
     register,
     handleSubmit,
@@ -24,9 +24,16 @@ const ForgotPassword = () => {
   });
 
   const onSubmit = async (data) => {
-    // Simulate API call for password reset
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log('Sending reset link to:', data.email);
+    const { email } = data;
+    const { error } = await supabase.functions.invoke('resend-password-reset', {
+      body: { email }
+    });
+
+    if (error) {
+      alert('Error: ' + error.message);
+      return;
+    }
+
     setIsSubmitted(true);
   };
 
@@ -41,7 +48,7 @@ const ForgotPassword = () => {
         {/* Headings */}
         <h1 className="text-2xl font-semibold text-white mb-2 tracking-tight">Reset Password</h1>
         <p className="text-sm text-neutral-400 mb-8 font-medium text-center">
-          {isSubmitted 
+          {isSubmitted
             ? "Check your email for a link to reset your password. If it doesn't appear within a few minutes, check your spam folder."
             : "Enter your email address and we'll send you a link to reset your password."}
         </p>

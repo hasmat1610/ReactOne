@@ -63,36 +63,26 @@ export default function Signup() {
     setErrorMessage(null)
     setIsSubmitting(true)
     const { name, email, password } = data
-    const { data: result, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: { name },
-      },
+
+    const { data: result, error: invokeError } = await supabase.functions.invoke('resend-signup', {
+      body: { email, password, name },
     })
 
-    if (error) {
-      console.error('Supabase signup failed:', error)
-      setErrorMessage(error.message || 'Failed to sign up. Please try again.')
+    if (invokeError || result?.error) {
+      console.error('Signup failed:', invokeError || result?.error)
+      setErrorMessage(invokeError?.message || result?.error || 'Failed to sign up. Please try again.')
       setIsSubmitting(false)
       return
     }
 
-    const session = result.session
-    const user = result.user
-    if (session?.access_token && user) {
-      setAuthContext(session.access_token, {
-        name,
-        email: user.email ?? undefined,
-        picture: (user.user_metadata as { picture?: string })?.picture,
-        ...user.user_metadata,
-      })
-      navigate('/profile')
-    } else {
-      navigate('/login')
-    }
-
+    // Since we're using a custom flow, we don't get an automatic session.
+    // We should tell the user to check their email.
+    setErrorMessage(null)
     setIsSubmitting(false)
+    
+    // Create a temporary success state or navigate to a special page
+    alert('Signup successful! Please check your email to verify your account.')
+    navigate('/login')
   }
 
   return (

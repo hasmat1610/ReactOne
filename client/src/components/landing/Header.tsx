@@ -6,6 +6,7 @@ import {
   Braces,
   ChevronDown,
   Code,
+  Database,
   Layers,
   LogOut,
   Menu,
@@ -80,7 +81,10 @@ const navMenus: NavMenu[] = [
     icon: Server,
     color: 'from-amber-400 to-orange-500',
     dotColor: 'bg-amber-400',
-    items: [{ to: '/backend-integration', icon: Server, title: 'Backend Integration', desc: 'Node.js & Express patterns' }],
+    items: [
+      { to: '/backend-integration', icon: Server, title: 'Backend Integration', desc: 'Node.js & Express patterns' },
+      { to: '/supabase-guide', icon: Database, title: 'Supabase Guide', desc: 'Auth, DB & RLS masterclass' },
+    ],
   },
   {
     label: 'Library',

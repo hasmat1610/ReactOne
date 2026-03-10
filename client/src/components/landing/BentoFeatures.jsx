@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, BookOpen, Sparkles, Server, Code, Palette, ArrowRight } from 'lucide-react';
+import { Shield, BookOpen, Sparkles, Database, Code, Palette, ArrowRight } from 'lucide-react';
 
 const BentoFeatures = () => {
   return (
@@ -119,33 +119,28 @@ const BentoFeatures = () => {
 
           {/* --- Row 2 --- */}
 
-          {/* Backend Integration (col-span-1) */}
-          <Link to="/backend-integration" className="col-span-1 group relative rounded-3xl border border-white/5 bg-[#0a0d14] p-8 text-left overflow-hidden transition-all hover:border-[#216be4]/30 flex flex-col justify-between no-underline">
+          <Link to="/supabase-guide" className="col-span-1 group relative rounded-3xl border border-white/5 bg-[#0a0d14] p-8 text-left overflow-hidden transition-all hover:border-[#3ECF8E]/30 flex flex-col justify-between no-underline">
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-[#216be4]/10 border border-[#216be4]/20 flex items-center justify-center text-[#216be4] shadow-[0_0_15px_rgba(33,107,228,0.2)]">
-                  <Server className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-xl bg-[#3ECF8E]/10 border border-[#3ECF8E]/20 flex items-center justify-center text-[#3ECF8E] shadow-[0_0_15px_rgba(62,207,142,0.2)]">
+                  <Database className="w-5 h-5" />
                 </div>
-                <h3 className="text-xl font-bold text-white tracking-tight">Backend</h3>
+                <h3 className="text-xl font-bold text-white tracking-tight">Supabase Guide</h3>
               </div>
               <p className="text-zinc-400 text-sm leading-relaxed mb-8">
-                Node.js & Express patterns, REST API best practices, and full-stack integration guides.
+                Authentication, PostgreSQL, RLS policies, and full-stack integration patterns.
               </p>
             </div>
 
             {/* Backend Mock UI */}
-            <div className="mt-auto space-y-3 font-mono text-xs">
+            <div className="mt-auto space-y-3 font-mono text-xs text-white/40">
               <div className="flex items-center gap-3 p-3 rounded-lg border border-white/5 bg-black/40">
-                <span className="text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded font-semibold text-[10px]">POST</span>
-                <span className="text-zinc-400">/api/auth/login</span>
+                <span className="text-[#3ECF8E]/70 bg-[#3ECF8E]/10 px-2 py-0.5 rounded font-semibold text-[10px]">AUTH</span>
+                <span className="text-zinc-400">/supabase-login</span>
               </div>
               <div className="flex items-center gap-3 p-3 rounded-lg border border-white/5 bg-black/40">
-                <span className="text-[#216be4] bg-[#216be4]/10 px-2 py-0.5 rounded font-semibold text-[10px]">GET</span>
-                <span className="text-zinc-400">/api/users/profile</span>
-              </div>
-              <div className="flex items-center gap-3 p-3 rounded-lg border border-white/5 bg-black/40">
-                <span className="text-purple-400 bg-purple-400/10 px-2 py-0.5 rounded font-semibold text-[10px]">PUT</span>
-                <span className="text-zinc-400">/api/users/update</span>
+                <span className="text-sky-400/70 bg-sky-400/10 px-2 py-0.5 rounded font-semibold text-[10px]">DATA</span>
+                <span className="text-zinc-400">/api/fetch-posts</span>
               </div>
             </div>
           </Link>

@@ -23,6 +23,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/supabase-guide" className="hover:text-white transition-colors">
+                  Supabase Guide 
+                </Link>
+              </li>
+              <li>
                 <Link to="/google-auth" className="hover:text-white transition-colors">
                   Google Auth
                 </Link>

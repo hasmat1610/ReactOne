@@ -212,6 +212,23 @@ export default function Login() {
           >
             Sign Up
           </Link>
+          <div className="mt-4 pt-4 border-t border-[#333]/30">
+            <button 
+              onClick={async () => {
+                const email = prompt('Please enter your email to resend the verification link:');
+                if (email) {
+                  const { error } = await supabase.functions.invoke('resend-verification', {
+                    body: { email }
+                  });
+                  if (error) alert('Error: ' + error.message);
+                  else alert('Verification link resent! Please check your inbox.');
+                }
+              }}
+              className="text-neutral-500 hover:text-white transition-colors cursor-pointer"
+            >
+              Didn&apos;t receive email? <span className="text-[#216be4] font-semibold">Resend Link</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
