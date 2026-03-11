@@ -81,7 +81,18 @@ export default function Signup() {
     setIsSubmitting(false)
     
     // Create a temporary success state or navigate to a special page
-    alert('Signup successful! Please check your email to verify your account.')
+    const resendLink = async () => {
+      await supabase.functions.invoke('send-verification-email', {
+        body: { 
+          email, 
+          name, 
+          verificationUrl: window.location.origin + '/login' // Simplified for this example
+        }
+      });
+      alert('Verification link resent!');
+    };
+
+    alert('Signup successful! Please check your email to verify your account.');
     navigate('/login')
   }
 

@@ -13,6 +13,7 @@ import {
   Target,
   ChevronRight,
 } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 
 const LEARNING_MODULES = [
   { name: 'HTML & CSS Fundamentals', progress: 100, color: '#F97316' },
@@ -109,6 +110,20 @@ const Profile = () => {
 
             {/* Actions */}
             <div className="flex flex-col gap-2">
+              <button
+                onClick={async () => {
+                  if (!user.email) return;
+                  const { error } = await supabase.functions.invoke('resend-verification', {
+                    body: { email: user.email }
+                  });
+                  if (error) alert('Error: ' + error.message);
+                  else alert('Verification link resent! Please check your inbox.');
+                }}
+                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#216be4]/10 border border-[#216be4]/20 text-sm text-[#216be4] hover:bg-[#216be4]/20 transition-all cursor-pointer"
+              >
+                <Mail className="w-4 h-4" />
+                Resend Verification
+              </button>
               <button
                 onClick={handleLogout}
                 className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-sm text-white/60 hover:text-red-400 hover:border-red-500/20 hover:bg-red-500/5 transition-all cursor-pointer"

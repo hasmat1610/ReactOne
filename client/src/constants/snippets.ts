@@ -1,4 +1,18 @@
-export const AUTH_SNIPPETS = {
+export interface SnippetFile {
+  filename: string;
+  code: string;
+}
+
+export interface SnippetCategory {
+  title: string;
+  files: SnippetFile[];
+}
+
+export interface AuthSnippets {
+  [key: string]: SnippetCategory;
+}
+
+export const AUTH_SNIPPETS: AuthSnippets = {
   signup: {
     title: "Sign Up (Normal)",
     files: [
