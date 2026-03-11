@@ -15,7 +15,7 @@ export type AuthContextValue = {
   isAuthenticated: boolean
   isLoading: boolean
   login: (token: string, userData: AuthUser) => void
-  logout: () => void
+  logout: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null)
@@ -32,11 +32,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsAuthenticated(true)
   }
 
-  const logout = () => {
-    localStorage.removeItem('token')
-    delete api.defaults.headers.common.Authorization
-    setUser(null)
-    setIsAuthenticated(false)
+  const logout = async () => {
+    try {
+      await supabase.auth.signOut()
+    } catch (error) {
+      console.error('Error signing out from Supabase', error)
+    } finally {
+      localStorage.removeItem('token')
+      delete api.defaults.headers.common.Authorization
+      setUser(null)
+      setIsAuthenticated(false)
+    }
   }
 
   useEffect(() => {

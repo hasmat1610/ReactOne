@@ -74,6 +74,14 @@ export function getRouteSeo(pathname: string): RouteSeo {
       title: 'Backend Integration — ReactOne',
       description: 'Node.js and Express integration patterns.',
     },
+    '/mongo-vs-postgres': {
+      title: 'MongoDB vs PostgreSQL — ReactOne',
+      description: 'A comprehensive comparison between Document and Relational databases.',
+    },
+    '/axios-post-guide': {
+      title: 'Axios POST Guide — ReactOne',
+      description: 'Comprehensive guide to Axios POST requests, including interceptors and advanced patterns.',
+    },
 
   }
 

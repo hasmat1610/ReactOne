@@ -26,10 +26,12 @@ import BackendIntegration from './pages/BackendIntegration'
 import SupabaseGuide from './pages/SupabaseGuide'
 import SupabaseMCP from './pages/SupabaseMCP'
 import SupabaseAutomation from './pages/SupabaseAutomation'
+import MongoVsPostgres from './pages/MongoVsPostgres'
 import { getRouteSeo } from './seo/routesSeo'
 import AdminDashboard from './pages/AdminDashboard'
 import { AdminRoute } from './components/auth/AdminRoute'
 import Dashboard from './pages/Dashboard'
+import AxiosPostGuide from './pages/AxiosPostGuide'
 
 function AppContent() {
   const location = useLocation()
@@ -82,6 +84,8 @@ function AppContent() {
             <Route path="/supabase-guide" element={<SupabaseGuide />} />
             <Route path="/supabase-mcp" element={<SupabaseMCP />} />
             <Route path="/supabase-automation" element={<SupabaseAutomation />} />
+            <Route path="/mongo-vs-postgres" element={<MongoVsPostgres />} />
+            <Route path="/axios-post-guide" element={<AxiosPostGuide />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

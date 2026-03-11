@@ -38,7 +38,7 @@ type NavMenu = {
 
 const navMenus: NavMenu[] = [
   {
-    label: 'UI/UX',
+    label: 'Architect',
     icon: Palette,
     color: 'from-pink-400 to-rose-500',
     dotColor: 'bg-pink-400',
@@ -48,7 +48,7 @@ const navMenus: NavMenu[] = [
     ],
   },
   {
-    label: 'Frontend',
+    label: 'Engine',
     icon: Monitor,
     color: 'from-emerald-400 to-teal-500',
     dotColor: 'bg-emerald-400',
@@ -56,21 +56,12 @@ const navMenus: NavMenu[] = [
       { to: '/auth-flow-code', icon: Braces, title: 'Auth Flow', desc: 'Production-ready auth snippets' },
       { to: '/google-auth', icon: Shield, title: 'Google Auth', desc: 'OAuth 2.0 implementation guide' },
       { to: '/axios-react', icon: TerminalSquare, title: 'Axios React', desc: 'HTTP client best practices' },
+      { to: '/axios-post-guide', icon: Zap, title: 'Axios POST', desc: 'Deep dive into POST requests' },
+      { to: '/backend-integration', icon: Server, title: 'Node.js & Express', desc: 'Custom backend patterns' },
     ],
   },
   {
-    label: 'Backend',
-    icon: Server,
-    color: 'from-amber-400 to-orange-500',
-    dotColor: 'bg-amber-400',
-    items: [
-      { to: '/backend-integration', icon: Server, title: 'Backend Integration', desc: 'Node.js & Express patterns' },
-      { to: '/supabase-guide', icon: Database, title: 'Supabase Guide', desc: 'Auth, DB & RLS masterclass' },
-      { to: '/supabase-automation', icon: Workflow, title: 'Supabase Automation', desc: 'AI-powered backend workflows' },
-    ],
-  },
-  {
-    label: 'Library',
+    label: 'Ecosystem',
     icon: BookOpen,
     color: 'from-teal-400 to-cyan-500',
     dotColor: 'bg-teal-400',
@@ -78,9 +69,20 @@ const navMenus: NavMenu[] = [
       { to: '/tanstack-query', icon: Layers, title: 'TanStack Query', desc: 'Async state management' },
       { to: '/redux-toolkit', icon: Braces, title: 'Redux Toolkit', desc: 'Global state management' },
       { to: '/zustand', icon: Sparkles, title: 'Zustand', desc: 'Lightweight state management' },
-      { to: '/react-query', icon: Monitor, title: 'React Query', desc: 'Server state & caching' },
       { to: '/react-hook-form', icon: Shield, title: 'React Hook Form', desc: 'Performant form handling' },
       { to: '/formik', icon: Shield, title: 'Formik', desc: 'Robust form handling' },
+    ],
+  },
+  {
+    label: 'Infrastructure',
+    icon: Database,
+    color: 'from-amber-400 to-orange-500',
+    dotColor: 'bg-amber-400',
+    items: [
+      { to: '/supabase-guide', icon: Database, title: 'Supabase Guide', desc: 'Auth, DB & RLS masterclass' },
+      { to: '/supabase-mcp', icon: Cpu, title: 'Supabase MCP', desc: 'Manage Supabase with AI' },
+      { to: '/supabase-automation', icon: Workflow, title: 'Automation', desc: 'AI-powered backend workflows' },
+      { to: '/mongo-vs-postgres', icon: Layers, title: 'Mongo vs Postgres', desc: 'Document vs Relational debate' },
     ],
   },
 ]
@@ -104,8 +106,8 @@ export default function Header() {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  const handleLogout = () => {
-    logout()
+  const handleLogout = async () => {
+    await logout()
     setDropdownOpen(false)
     navigate('/')
   }

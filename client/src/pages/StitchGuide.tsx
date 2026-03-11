@@ -207,6 +207,45 @@ const StitchGuide = () => {
             </div>
           </div>
 
+          <h3 className="text-2xl font-bold text-white mb-6 mt-12">Efficiency: Traditional vs AI-Driven</h3>
+          <p className="text-slate-300 mb-8 text-lg">
+            By shifting from manual pixel execution to high-level structural rules, Google Stitch drastically reduces the time and complexity of building production-ready UIs.
+          </p>
+
+          <div className="overflow-hidden rounded-2xl border border-white/10 mb-12 not-prose bg-[#0a0f18]">
+            <table className="w-full text-left text-sm border-collapse">
+              <thead>
+                <tr className="bg-white/5 border-b border-white/10">
+                  <th className="px-6 py-4 font-bold text-slate-400 uppercase tracking-wider">Workflow Feature</th>
+                  <th className="px-6 py-4 font-bold text-slate-200">Traditional Design</th>
+                  <th className="px-6 py-4 font-bold text-sky-400">Google Stitch</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5">
+                <tr>
+                  <td className="px-6 py-4 font-medium text-slate-300 bg-white/5 italic">Component Setup</td>
+                  <td className="px-6 py-4 text-slate-400 font-mono">15-30 mins</td>
+                  <td className="px-6 py-4 text-sky-300 font-bold bg-sky-500/5 font-mono">~10 secs</td>
+                </tr>
+                <tr>
+                  <td className="px-6 py-4 font-medium text-slate-300 bg-white/5 italic">Auto-Layout Rules</td>
+                  <td className="px-6 py-4 text-slate-400">Manual constraints</td>
+                  <td className="px-6 py-4 text-sky-300 font-bold bg-sky-500/5">Inherent Logic</td>
+                </tr>
+                <tr>
+                  <td className="px-6 py-4 font-medium text-slate-300 bg-white/5 italic">Responsiveness</td>
+                  <td className="px-6 py-4 text-slate-400">Manual breakpoints</td>
+                  <td className="px-6 py-4 text-sky-300 font-bold bg-sky-500/5">Semantic Adaptation</td>
+                </tr>
+                <tr>
+                  <td className="px-6 py-4 font-medium text-slate-300 bg-white/5 italic">Design Handoff</td>
+                  <td className="px-6 py-4 text-slate-400">Static Figma Specs</td>
+                  <td className="px-6 py-4 text-sky-300 font-bold bg-sky-500/5">React Blueprints</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
           <h3 className="text-2xl font-bold text-white mb-4 mt-8">Conclusion</h3>
           <p className="text-slate-300 leading-relaxed text-lg">
             By adopting an AI-driven approach for UI structuring, design teams can radically decrease the time from ideation to high-fidelity wireframing. Try combining Google Stitch, MCP, and Figma today to supercharge your design process.
