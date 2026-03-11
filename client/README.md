@@ -1,16 +1,42 @@
-# React + Vite
+# ReactOne Frontend 🎨
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The ReactOne frontend is a high-performance, strictly typed React application built with **Vite** and **React 19**. It serves as an interactive documentation hub and learning platform.
 
-Currently, two official plugins are available:
+## 🚀 Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+2.  **Environment Setup:**
+    Create a `.env` file in this directory with the following variables:
+    ```env
+    VITE_SUPABASE_URL=your_supabase_url
+    VITE_SUPABASE_PUBLISHABLE_KEY=your_anon_key
+    VITE_AUTH_API_KEY=your_internal_api_key
+    ```
+3.  **Run Development Server:**
+    ```bash
+    npm run dev
+    ```
 
-## React Compiler
+## 🏗 Key Components & Pages
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Authentication
+- `Signup.tsx` & `Login.tsx`: Custom flows powered by Supabase Edge Functions.
+- `Profile.tsx`: User dashboard with learning progress tracking and email resend capabilities.
 
-## Expanding the ESLint configuration
+### Learning Guides (25+ Pages)
+- **State Management:** `ZustandGuide.tsx`, `ReduxToolkit.tsx`.
+- **Forms:** `ReactHookFormGuide.tsx`, `FormikGuide.tsx`.
+- **Queries:** `ReactQueryGuide.tsx`, `TanStackQuery.tsx`.
+- **Backend:** `AxiosReact.tsx`, `SupabaseGuide.tsx`.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Advanced Labs
+- `GenCodeLab.tsx`: AI-powered code generation interface.
+- `FigmaMCP.tsx`: Guide for Design-to-Code automation.
+
+## 🛠 Tech Stack Details
+- **Styling:** Tailwind CSS v4 with custom glassmorphism utilities.
+- **Animations:** Framer Motion for smooth transitions and Lucide for iconography.
+- **Type Safety:** 100% TypeScript coverage with strict mode enabled in `tsconfig.json`.

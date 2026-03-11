@@ -25,9 +25,9 @@ const checklistItems = [
 ];
 
 const FigmaChecklist = () => {
-  const [completed, setCompleted] = useState(new Set());
+  const [completed, setCompleted] = useState<Set<string>>(new Set());
 
-  const toggleItem = (id) => {
+  const toggleItem = (id: string) => {
     const newCompleted = new Set(completed);
     if (newCompleted.has(id)) {
       newCompleted.delete(id);

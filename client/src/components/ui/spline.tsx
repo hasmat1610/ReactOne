@@ -4,7 +4,12 @@ import { Suspense, lazy } from 'react'
 import { Loader2 } from 'lucide-react'
 const Spline = lazy(() => import('@splinetool/react-spline'))
 
-export function SplineScene({ scene, className }) {
+interface SplineSceneProps {
+  scene: string;
+  className?: string;
+}
+
+export function SplineScene({ scene, className }: SplineSceneProps) {
   return (
     <Suspense 
       fallback={

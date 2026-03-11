@@ -11,8 +11,21 @@ const AuthFlowCode = () => {
     setActiveFileIndex(0);
   }, [activeTab]);
 
+  interface SnippetFile {
+    filename: string;
+    code: string;
+  }
+
+  interface SnippetAction {
+    icon: any;
+    title: string;
+    files: SnippetFile[];
+    filename?: string;
+    code?: string;
+  }
+
   // Define the code snippets
-  const snippets = {
+  const snippets: Record<string, SnippetAction> = {
     signup: {
       icon: UserPlus,
       title: "Sign Up (Normal)",
@@ -494,6 +507,7 @@ export const verifyOTPURL = async (data: any) => {
 
   const handleCopy = () => {
     const activeData = snippets[activeTab];
+    if (!activeData) return;
     const codeToCopy = activeData.files && activeData.files[activeFileIndex]
       ? activeData.files[activeFileIndex].code
       : activeData.code;
@@ -618,8 +632,8 @@ export const verifyOTPURL = async (data: any) => {
                     <div className="w-3 h-3 rounded-full bg-green-500"></div>
                   </div>
                   <div className="flex gap-1 items-end pt-1">
-                    {snippets[activeTab].files ? (
-                      snippets[activeTab].files.map((file, idx) => (
+                    {snippets[activeTab]?.files ? (
+                      snippets[activeTab]?.files?.map((file, idx) => (
                         <button
                           key={idx}
                           onClick={() => setActiveFileIndex(idx)}
@@ -634,7 +648,7 @@ export const verifyOTPURL = async (data: any) => {
                     ) : (
                       <div className="text-xs font-mono text-slate-400 flex items-center justify-center flex-1 gap-2 px-4 py-1.5">
                         <span className="text-slate-500 hidden sm:inline">src/components/auth/</span>
-                        <span className="text-sky-400">{snippets[activeTab].filename}</span>
+                        <span className="text-sky-400">{snippets[activeTab]?.filename}</span>
                       </div>
                     )}
                   </div>
@@ -656,9 +670,9 @@ export const verifyOTPURL = async (data: any) => {
               <div className="p-6 md:p-8 overflow-x-auto min-h-[500px]">
                 <pre className="text-sm font-mono text-slate-300 leading-relaxed m-0">
                   <code className="language-jsx">
-                    {snippets[activeTab].files
-                      ? snippets[activeTab].files[activeFileIndex]?.code
-                      : snippets[activeTab].code}
+                    {snippets[activeTab]?.files
+                      ? snippets[activeTab]?.files?.[activeFileIndex]?.code
+                      : snippets[activeTab]?.code}
                   </code>
                 </pre>
               </div>

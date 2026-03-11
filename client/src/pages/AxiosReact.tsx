@@ -2,7 +2,19 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Server, Zap, Settings, ShieldCheck, Download, Copy, CheckCircle2, Code } from 'lucide-react';
 
-const guideData = [
+interface GuideFile {
+  name: string;
+  content: string;
+}
+
+interface GuideItem {
+  id: string;
+  title: string;
+  icon: React.ReactNode;
+  files: GuideFile[];
+}
+
+const guideData: GuideItem[] = [
   {
     id: 'setup',
     title: 'Setup & Installation',
@@ -228,7 +240,7 @@ export default UserListOptimized;`
 ];
 
 const AxiosReact = () => {
-  const [activeGuideId, setActiveGuideId] = useState(guideData[0].id);
+  const [activeGuideId, setActiveGuideId] = useState(guideData[0]?.id || 'setup');
   const [activeFileIndex, setActiveFileIndex] = useState(0);
   const [isCopied, setIsCopied] = useState(false);
   const [copiedPrompt1, setCopiedPrompt1] = useState(false);
@@ -236,13 +248,15 @@ const AxiosReact = () => {
 
   const activeGuide = guideData.find(g => g.id === activeGuideId);
 
-  const handleGuideChange = (id) => {
+  if (!activeGuide) return null;
+
+  const handleGuideChange = (id: string) => {
     setActiveGuideId(id);
     setActiveFileIndex(0); // Reset to first file when switching guides
     setIsCopied(false);
   };
 
-  const handleCopyPrompt = (text, promptNum) => {
+  const handleCopyPrompt = (text: string, promptNum: number) => {
     navigator.clipboard.writeText(text);
     if (promptNum === 1) {
       setCopiedPrompt1(true);
@@ -254,9 +268,12 @@ const AxiosReact = () => {
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(activeGuide.files[activeFileIndex].content);
-    setIsCopied(true);
-    setTimeout(() => setIsCopied(false), 2000);
+    const file = activeGuide.files[activeFileIndex];
+    if (file) {
+      navigator.clipboard.writeText(file.content);
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
+    }
   };
 
   return (
@@ -751,7 +768,7 @@ export default api;`}</code></pre>
             <div className="flex-1 p-5 sm:p-8 overflow-auto relative custom-scrollbar bg-[#0d121c]">
               <pre className="text-[14px] sm:text-[15px] leading-relaxed font-mono text-[#a5b4fc] m-0">
                 <code>
-                  {activeGuide.files[activeFileIndex].content}
+                  {activeGuide.files[activeFileIndex]?.content}
                 </code>
               </pre>
             </div>

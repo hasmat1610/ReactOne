@@ -19,7 +19,7 @@ const ICON_SIZE = 60;
 const CENTER = 230; // half of container (460)
 
 // Calculate position on circle
-const getPos = (i, total) => {
+const getPos = (i: number, total: number) => {
     const angle = (i / total) * 2 * Math.PI - Math.PI / 2;
     return {
         x: CENTER + Math.cos(angle) * RADIUS - ICON_SIZE / 2,

@@ -42,54 +42,32 @@ const navMenus: NavMenu[] = [
     icon: Palette,
     color: 'from-pink-400 to-rose-500',
     dotColor: 'bg-pink-400',
-    items: [{ to: '/stitch-guide', icon: Layers, title: 'Stitch Guide', desc: 'AI-powered UI generation workflow' }],
-  },
-  {
-    label: 'Code',
-    icon: Code,
-    color: 'from-cyan-400 to-blue-500',
-    dotColor: 'bg-cyan-400',
     items: [
-      { to: '/auth-flow-code', icon: Braces, title: 'Auth Flow Code', desc: 'Production-ready auth snippets' },
-      { to: '/google-auth', icon: Shield, title: 'Google Auth', desc: 'OAuth 2.0 implementation guide' },
-    ],
-  },
-  {
-    label: 'Prompt',
-    icon: MessageSquare,
-    color: 'from-violet-400 to-purple-500',
-    dotColor: 'bg-violet-400',
-    items: [
+      { to: '/stitch-guide', icon: Layers, title: 'Stitch Guide', desc: 'AI-powered UI generation workflow' },
       { to: '/figma-mcp', icon: Sparkles, title: 'Figma MCP', desc: 'Figma-to-code AI pipeline' },
-      { to: '/gen-code-lab', icon: Zap, title: 'GenCode Lab', desc: 'AI-driven code evolution' },
     ],
   },
   {
-    label: 'MCP',
-    icon: Puzzle,
-    color: 'from-indigo-400 to-blue-600',
-    dotColor: 'bg-indigo-400',
-    items: [
-      { to: '/figma-mcp', icon: Sparkles, title: 'Figma MCP', desc: 'Figma-to-code AI pipeline' },
-      { to: '/supabase-automation', icon: Workflow, title: 'Supabase Automation', desc: 'AI-powered backend workflows' },
-    ],
-  },
-  {
-    label: 'FrontEnd',
+    label: 'Frontend',
     icon: Monitor,
     color: 'from-emerald-400 to-teal-500',
     dotColor: 'bg-emerald-400',
-    items: [{ to: '/axios-react', icon: TerminalSquare, title: 'Axios React', desc: 'HTTP client best practices' }],
+    items: [
+      { to: '/auth-flow-code', icon: Braces, title: 'Auth Flow', desc: 'Production-ready auth snippets' },
+      { to: '/google-auth', icon: Shield, title: 'Google Auth', desc: 'OAuth 2.0 implementation guide' },
+      { to: '/axios-react', icon: TerminalSquare, title: 'Axios React', desc: 'HTTP client best practices' },
+    ],
   },
   {
-    label: 'BackEnd',
+    label: 'Backend',
     icon: Server,
     color: 'from-amber-400 to-orange-500',
     dotColor: 'bg-amber-400',
-      items: [
-        { to: '/backend-integration', icon: Server, title: 'Backend Integration', desc: 'Node.js & Express patterns' },
-        { to: '/supabase-guide', icon: Database, title: 'Supabase Guide', desc: 'Auth, DB & RLS masterclass' },
-      ],
+    items: [
+      { to: '/backend-integration', icon: Server, title: 'Backend Integration', desc: 'Node.js & Express patterns' },
+      { to: '/supabase-guide', icon: Database, title: 'Supabase Guide', desc: 'Auth, DB & RLS masterclass' },
+      { to: '/supabase-automation', icon: Workflow, title: 'Supabase Automation', desc: 'AI-powered backend workflows' },
+    ],
   },
   {
     label: 'Library',
@@ -97,7 +75,6 @@ const navMenus: NavMenu[] = [
     color: 'from-teal-400 to-cyan-500',
     dotColor: 'bg-teal-400',
     items: [
-      { to: '/axios-react', icon: TerminalSquare, title: 'Axios React', desc: 'HTTP client integration' },
       { to: '/tanstack-query', icon: Layers, title: 'TanStack Query', desc: 'Async state management' },
       { to: '/redux-toolkit', icon: Braces, title: 'Redux Toolkit', desc: 'Global state management' },
       { to: '/zustand', icon: Sparkles, title: 'Zustand', desc: 'Lightweight state management' },

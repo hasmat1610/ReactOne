@@ -14,8 +14,8 @@ const StitchMentor = () => {
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
 
-  const handleSend = (e) => {
-    e?.preventDefault();
+  const handleSend = (e: React.FormEvent) => {
+    e.preventDefault();
     if (!inputValue.trim()) return;
 
     // Add user message

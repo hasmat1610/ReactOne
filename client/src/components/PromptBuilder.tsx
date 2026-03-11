@@ -68,9 +68,10 @@ const PromptBuilder = () => {
   const [activeTemplate, setActiveTemplate] = useState('ecommerce');
   const [copied, setCopied] = useState(false);
 
-  const template = promptTemplates.find(t => t.id === activeTemplate);
+  const template = promptTemplates.find(t => t.id === activeTemplate) || promptTemplates[0];
 
   const getFullText = () => {
+    if (!template) return '';
     return template.parts.map(p => p.text).join('');
   };
 
@@ -79,6 +80,8 @@ const PromptBuilder = () => {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  if (!template) return null;
 
   return (
     <div className="w-full">

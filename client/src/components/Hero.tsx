@@ -3,10 +3,7 @@ import React from 'react';
 const Hero = () => {
   return (
     <section className="relative w-full min-h-screen flex items-center justify-center pt-20 pb-20 overflow-visible text-white">
-      {/* 
-        No background color here so that the SplashCursor from App.jsx 
-        can be seen clearly underneath everything.
-      */}
+
       
       <div className="container mx-auto px-6 relative z-10 flex flex-col items-center justify-center text-center">
         

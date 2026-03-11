@@ -22,13 +22,14 @@ import OtpVerification from './pages/OtpVerification'
 import Profile from './pages/Profile'
 import NotFound from './pages/NotFound'
 import BackendIntegration from './pages/BackendIntegration'
-import GenCodeLab from './pages/GenCodeLab'
+
 import SupabaseGuide from './pages/SupabaseGuide'
 import SupabaseMCP from './pages/SupabaseMCP'
 import SupabaseAutomation from './pages/SupabaseAutomation'
 import { getRouteSeo } from './seo/routesSeo'
 import AdminDashboard from './pages/AdminDashboard'
 import { AdminRoute } from './components/auth/AdminRoute'
+import Dashboard from './pages/Dashboard'
 
 function AppContent() {
   const location = useLocation()
@@ -67,6 +68,7 @@ function AppContent() {
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/otp-verification" element={<OtpVerification />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route
               path="/admin"
               element={
@@ -76,7 +78,7 @@ function AppContent() {
               }
             />
             <Route path="/backend-integration" element={<BackendIntegration />} />
-            <Route path="/gen-code-lab" element={<GenCodeLab />} />
+
             <Route path="/supabase-guide" element={<SupabaseGuide />} />
             <Route path="/supabase-mcp" element={<SupabaseMCP />} />
             <Route path="/supabase-automation" element={<SupabaseAutomation />} />

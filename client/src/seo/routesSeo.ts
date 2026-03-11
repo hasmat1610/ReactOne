@@ -74,10 +74,7 @@ export function getRouteSeo(pathname: string): RouteSeo {
       title: 'Backend Integration — ReactOne',
       description: 'Node.js and Express integration patterns.',
     },
-    '/gen-code-lab': {
-      title: 'GenCode Lab — ReactOne',
-      description: 'AI-driven code evolution and experiments.',
-    },
+
   }
 
   return map[pathname] ?? DEFAULT

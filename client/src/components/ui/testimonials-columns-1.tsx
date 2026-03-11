@@ -3,7 +3,20 @@ import React from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
 
-export const TestimonialsColumn = (props) => {
+interface Testimonial {
+  content: string;
+  avatar: string;
+  name: string;
+  role: string;
+}
+
+interface TestimonialsColumnProps {
+  testimonials: Testimonial[];
+  className?: string;
+  duration?: number;
+}
+
+export const TestimonialsColumn = (props: TestimonialsColumnProps) => {
   return (
     <div className={props.className}>
       <motion.div

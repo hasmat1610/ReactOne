@@ -2,7 +2,19 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Server, Zap, Settings, ShieldCheck, Download, Copy, CheckCircle2, Code, RefreshCw, Database } from 'lucide-react';
 
-const guideData = [
+interface GuideFile {
+  name: string;
+  content: string;
+}
+
+interface GuideItem {
+  id: string;
+  title: string;
+  icon: React.ReactNode;
+  files: GuideFile[];
+}
+
+const guideData: GuideItem[] = [
     {
         id: 'setup',
         title: 'Setup & Installation',
@@ -211,7 +223,7 @@ export const queryKeys = {
 ];
 
 const TanStackQuery = () => {
-    const [activeGuideId, setActiveGuideId] = useState(guideData[0].id);
+    const [activeGuideId, setActiveGuideId] = useState(guideData[0]?.id || 'setup');
     const [activeFileIndex, setActiveFileIndex] = useState(0);
     const [isCopied, setIsCopied] = useState(false);
     const [copiedPrompt1, setCopiedPrompt1] = useState(false);
@@ -219,13 +231,15 @@ const TanStackQuery = () => {
 
     const activeGuide = guideData.find(g => g.id === activeGuideId);
 
-    const handleGuideChange = (id) => {
+    if (!activeGuide) return null;
+
+    const handleGuideChange = (id: string) => {
         setActiveGuideId(id);
         setActiveFileIndex(0);
         setIsCopied(false);
     };
 
-    const handleCopyPrompt = (text, promptNum) => {
+    const handleCopyPrompt = (text: string, promptNum: number) => {
         navigator.clipboard.writeText(text);
         if (promptNum === 1) {
             setCopiedPrompt1(true);
@@ -237,9 +251,12 @@ const TanStackQuery = () => {
     };
 
     const handleCopy = () => {
-        navigator.clipboard.writeText(activeGuide.files[activeFileIndex].content);
-        setIsCopied(true);
-        setTimeout(() => setIsCopied(false), 2000);
+        const file = activeGuide.files[activeFileIndex];
+        if (file) {
+            navigator.clipboard.writeText(file.content);
+            setIsCopied(true);
+            setTimeout(() => setIsCopied(false), 2000);
+        }
     };
 
     return (
@@ -636,7 +653,7 @@ export const useCreateTodo = () => {
                         </div>
                         <div className="flex-1 p-5 sm:p-8 overflow-auto relative custom-scrollbar bg-[#0d121c]">
                             <pre className="text-[14px] sm:text-[15px] leading-relaxed font-mono text-[#a5b4fc] m-0">
-                                <code>{activeGuide.files[activeFileIndex].content}</code>
+                                <code>{activeGuide.files[activeFileIndex]?.content}</code>
                             </pre>
                         </div>
                     </div>

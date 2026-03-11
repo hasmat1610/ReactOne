@@ -26,7 +26,7 @@ export default function Signup() {
     const token = params.get('token')
     if (token) {
       localStorage.setItem('token', token)
-      navigate('/profile')
+      navigate('/dashboard')
       window.location.reload()
     }
   }, [navigate])
@@ -49,7 +49,7 @@ export default function Signup() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: window.location.origin + '/profile',
+        redirectTo: window.location.origin + '/dashboard',
       },
     })
     if (error) {

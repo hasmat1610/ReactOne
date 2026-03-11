@@ -12,6 +12,7 @@ import {
   Clock,
   Target,
   ChevronRight,
+  Layout,
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
@@ -110,6 +111,13 @@ const Profile = () => {
 
             {/* Actions */}
             <div className="flex flex-col gap-2">
+              <Link
+                to="/dashboard"
+                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-sm text-white/60 hover:text-[#216be4] hover:border-[#216be4]/20 hover:bg-[#216be4]/5 transition-all cursor-pointer"
+              >
+                <Layout className="w-4 h-4" />
+                Back to Dashboard
+              </Link>
               <button
                 onClick={async () => {
                   if (!user.email) return;

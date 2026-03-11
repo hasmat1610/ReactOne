@@ -2,9 +2,20 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Server, Zap, Settings, ShieldCheck, Download, Copy, CheckCircle2, Code, Layers, Box } from 'lucide-react';
 
-const guideData = [
-    {
-        id: 'setup', title: 'Setup & Installation', icon: <Download className="w-[18px] h-[18px]" />, files: [
+interface GuideFile {
+    name: string;
+    content: string;
+}
+
+interface GuideItem {
+    id: string;
+    title: string;
+    icon: React.ReactNode;
+    files: GuideFile[];
+}
+
+const guideData: GuideItem[] = [
+    { id: 'setup', title: 'Setup & Installation', icon: <Download className="w-[18px] h-[18px]" />, files: [
             { name: 'Terminal', content: 'npm install zustand' },
             { name: 'Why Zustand?.txt', content: '// Zustand advantages:\n// 1. No Provider wrapper needed\n// 2. Under 1KB bundle size\n// 3. No boilerplate\n// 4. Built-in middleware (persist, devtools)\n// 5. Works outside React components\n// 6. TypeScript-first API' }
         ]
@@ -125,15 +136,18 @@ const guideData = [
 ];
 
 const ZustandGuide = () => {
-    const [activeGuideId, setActiveGuideId] = useState(guideData[0].id);
+    const [activeGuideId, setActiveGuideId] = useState(guideData[0]?.id || 'setup');
     const [activeFileIndex, setActiveFileIndex] = useState(0);
     const [isCopied, setIsCopied] = useState(false);
     const [copiedPrompt1, setCopiedPrompt1] = useState(false);
     const [copiedPrompt2, setCopiedPrompt2] = useState(false);
     const activeGuide = guideData.find(g => g.id === activeGuideId);
-    const handleGuideChange = (id) => { setActiveGuideId(id); setActiveFileIndex(0); setIsCopied(false); };
-    const handleCopyPrompt = (text, n) => { navigator.clipboard.writeText(text); if (n === 1) { setCopiedPrompt1(true); setTimeout(() => setCopiedPrompt1(false), 2000); } else { setCopiedPrompt2(true); setTimeout(() => setCopiedPrompt2(false), 2000); } };
-    const handleCopy = () => { navigator.clipboard.writeText(activeGuide.files[activeFileIndex].content); setIsCopied(true); setTimeout(() => setIsCopied(false), 2000); };
+
+    if (!activeGuide) return null;
+
+    const handleGuideChange = (id: string) => { setActiveGuideId(id); setActiveFileIndex(0); setIsCopied(false); };
+    const handleCopyPrompt = (text: string, n: number) => { navigator.clipboard.writeText(text); if (n === 1) { setCopiedPrompt1(true); setTimeout(() => setCopiedPrompt1(false), 2000); } else { setCopiedPrompt2(true); setTimeout(() => setCopiedPrompt2(false), 2000); } };
+    const handleCopy = () => { if (activeGuide.files[activeFileIndex]) { navigator.clipboard.writeText(activeGuide.files[activeFileIndex].content); setIsCopied(true); setTimeout(() => setIsCopied(false), 2000); } };
 
     return (
         <div className="min-h-screen bg-[#060913] text-slate-200 font-sans pb-24 selection:bg-amber-500/30">
@@ -300,7 +314,7 @@ const useAuthStore = create(
                     <div className="w-full lg:w-72 shrink-0"><h3 className="text-[12px] font-bold text-slate-500 uppercase tracking-widest mb-4 px-2">Lightweight State</h3><div className="flex flex-col gap-2">{guideData.map((g) => (<button key={g.id} onClick={() => handleGuideChange(g.id)} className={`flex items-center gap-3 px-4 py-3.5 rounded-xl border transition-all text-sm font-medium w-full text-left ${activeGuideId === g.id ? 'bg-[#0f1b2d] border-amber-500/30 text-amber-400' : 'bg-transparent border-white/5 text-slate-400 hover:bg-white/5'}`}><span className={activeGuideId === g.id ? 'text-amber-400' : 'text-slate-500'}>{g.icon}</span>{g.title}</button>))}</div></div>
                     <div className="w-full flex-1 bg-[#0d121c] rounded-2xl overflow-hidden border border-[#1e293b] flex flex-col min-h-[500px] lg:min-h-[600px]">
                         <div className="bg-[#151b2b] border-b border-[#1e293b] px-4 py-3 flex items-center justify-between shrink-0"><div className="flex items-center gap-6 w-full"><div className="flex gap-2 shrink-0"><div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div><div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div><div className="w-3 h-3 rounded-full bg-[#27c93f]"></div></div><div className="flex gap-2 overflow-x-auto flex-1">{activeGuide.files.map((f, i) => (<button key={i} onClick={() => setActiveFileIndex(i)} className={`px-3 py-1.5 rounded-md text-[13px] font-medium whitespace-nowrap ${activeFileIndex === i ? 'bg-[#1e293b] text-white' : 'text-slate-500 hover:text-slate-300'}`}>{f.name}</button>))}</div></div><button onClick={handleCopy} className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[13px] text-slate-400 hover:text-slate-200 hover:bg-[#1e293b] border border-[#1e293b]">{isCopied ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}{isCopied ? 'Copied' : 'Copy'}</button></div>
-                        <div className="flex-1 p-5 sm:p-8 overflow-auto bg-[#0d121c]"><pre className="text-[14px] sm:text-[15px] leading-relaxed font-mono text-[#a5b4fc] m-0"><code>{activeGuide.files[activeFileIndex].content}</code></pre></div>
+                        <div className="flex-1 p-5 sm:p-8 overflow-auto bg-[#0d121c]"><pre className="text-[14px] sm:text-[15px] leading-relaxed font-mono text-[#a5b4fc] m-0"><code>{activeGuide.files[activeFileIndex]?.content}</code></pre></div>
                     </div>
                 </div>
             </main>

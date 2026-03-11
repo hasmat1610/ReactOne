@@ -145,41 +145,7 @@ const BentoFeatures = () => {
             </div>
           </Link>
 
-          {/* GenCode Lab (col-span-1) */}
-          <Link to="/gen-code-lab" className="col-span-1 group relative rounded-3xl border border-white/5 bg-[#0a0d14] p-8 text-left overflow-hidden transition-all hover:border-[#216be4]/30 flex flex-col justify-between no-underline">
-            <div className="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-100 transition-opacity">
-              <div className="w-12 h-12 rounded-full bg-blue-500/20 blur-xl animate-pulse" />
-            </div>
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-[#216be4]/10 border border-[#216be4]/20 flex items-center justify-center text-[#216be4] shadow-[0_0_15px_rgba(33,107,228,0.2)]">
-                  <Sparkles className="w-5 h-5" />
-                </div>
-                <h3 className="text-xl font-bold text-white tracking-tight">GenCode Lab</h3>
-              </div>
-              <p className="text-zinc-400 text-sm leading-relaxed mb-8">
-                AI-driven code evolution. Take base components and refactor them with natural language prompts.
-              </p>
-            </div>
 
-            {/* GenCode Lab Mock UI */}
-            <div className="mt-auto border border-white/5 rounded-xl bg-black/40 p-4 overflow-hidden relative">
-              <div className="flex items-center gap-1.5 mb-3">
-                <div className="w-2 h-2 rounded-full bg-red-500/40" />
-                <div className="w-2 h-2 rounded-full bg-yellow-500/40" />
-                <div className="w-2 h-2 rounded-full bg-green-500/40" />
-                <span className="text-[10px] text-zinc-500 font-mono ml-1">vibe-forge.tsx</span>
-              </div>
-              <div className="space-y-2 opacity-50 bg-gradient-to-b from-white/5 to-transparent p-2 rounded-lg">
-                <div className="h-1.5 w-full bg-white/10 rounded" />
-                <div className="h-1.5 w-3/4 bg-white/10 rounded" />
-                <div className="h-1.5 w-1/2 bg-[#216be4]/30 rounded animate-pulse" />
-              </div>
-              <div className="mt-3 py-1.5 px-3 rounded-lg bg-blue-500 text-[10px] font-bold text-white inline-flex items-center gap-1 shadow-lg shadow-blue-500/20">
-                <Sparkles className="w-3 h-3" /> Evolve Code
-              </div>
-            </div>
-          </Link>
 
           {/* UI/UX Guides (col-span-1) */}
           <Link to="/stitch-guide" className="col-span-1 group relative rounded-3xl border border-white/5 bg-[#0a0d14] p-8 text-left overflow-hidden transition-all hover:border-[#216be4]/30 flex flex-col justify-between no-underline">

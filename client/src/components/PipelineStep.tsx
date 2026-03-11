@@ -1,6 +1,18 @@
 import React from 'react';
 
-const PipelineStep = ({ number, title, description, tools, colorClass, gradientClass, icon }) => {
+interface PipelineStepProps {
+  number: string | number;
+  title: string;
+  description: string;
+  tools: string[];
+  colorClass: string;
+  gradientClass: string;
+  icon?: React.ReactNode;
+}
+
+const PipelineStep: React.FC<PipelineStepProps> = ({ 
+  number, title, description, tools, colorClass, gradientClass, icon 
+}) => {
   return (
     <div className="relative flex flex-col md:flex-row gap-8 items-center bg-card/30 backdrop-blur-xl border border-white/5 rounded-3xl p-8 hover:bg-card/40 transition-all duration-300">
       

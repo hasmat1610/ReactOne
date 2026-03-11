@@ -3,10 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Atom, Loader2, KeyRound } from 'lucide-react';
 
 const OtpVerification = () => {
-  const [otp, setOtp] = useState(['', '', '', '', '', '']);
+  const [otp, setOtp] = useState<string[]>(['', '', '', '', '', '']);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
-  const inputRefs = useRef([]);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,16 +16,17 @@ const OtpVerification = () => {
     }
   }, []);
 
-  const handleChange = (index, value) => {
-    if (isNaN(value)) return;
+  const handleChange = (index: number, value: string) => {
+    if (isNaN(Number(value))) return;
 
     const newOtp = [...otp];
     // Allow pasting multiple digits
     if (value.length > 1) {
       const pastedData = value.substring(0, 6).split('');
       for (let i = 0; i < pastedData.length; i++) {
-        if (index + i < 6) {
-          newOtp[index + i] = pastedData[i];
+        const char = pastedData[i];
+        if (index + i < 6 && char !== undefined) {
+          newOtp[index + i] = char;
         }
       }
       setOtp(newOtp);
@@ -45,14 +46,14 @@ const OtpVerification = () => {
     }
   };
 
-  const handleKeyDown = (index, e) => {
+  const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
     // Move focus to previous input on backspace if current is empty
     if (e.key === 'Backspace' && otp[index] === '' && index > 0) {
       inputRefs.current[index - 1]?.focus();
     }
   };
 
-  const verifyOtp = async (e) => {
+  const verifyOtp = async (e: React.FormEvent) => {
     e.preventDefault();
     const otpValue = otp.join('');
     
@@ -96,7 +97,7 @@ const OtpVerification = () => {
             {otp.map((digit, index) => (
               <input
                 key={index}
-                ref={(el) => (inputRefs.current[index] = el)}
+                ref={(el) => { inputRefs.current[index] = el; }}
                 type="text"
                 inputMode="numeric"
                 maxLength={6} // Hack to allow pasting in the first cell
