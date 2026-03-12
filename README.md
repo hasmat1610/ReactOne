@@ -88,9 +88,9 @@ Ensure the following files are created based on the `.example` templates:
 - `server/.env`
 
 #### Key Variables:
-- `VITE_SUPABASE_URL` / `VITE_SUPABASE_PUBLISHABLE_KEY`
-- `RESEND_API_KEY` (Set in Supabase Secrets)
-- `CLIENT_ID` / `CLIENT_SECRET` (Google Console)
+- `VITE_SUPABASE_URL` / `VITE_SUPABASE_PUBLISHABLE_KEY` — Found in your Supabase Project Settings under API.
+- `RESEND_API_KEY` — Used for transactional emails. Set this as a [Supabase Secret](https://supabase.com/docs/guides/functions/secrets).
+- `CLIENT_ID` / `CLIENT_SECRET` — Obtain these from the [Google Cloud Console](https://console.cloud.google.com/apis/credentials). Configure your OAuth 2.0 Client IDs for web applications.
 
 ---
 

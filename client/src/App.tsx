@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
+import { SpeedInsights } from "@vercel/speed-insights/react"
 import { Helmet } from 'react-helmet-async'
 import LandingPage from './pages/LandingPage'
 import StitchGuide from './pages/StitchGuide'
@@ -105,6 +106,7 @@ export default function App() {
         Skip to main content
       </a>
       <AppContent />
+      <SpeedInsights />
     </BrowserRouter>
   )
 }
