@@ -13,15 +13,20 @@ if (!rootEl) {
   throw new Error('Root element #root not found')
 }
 
+import { store } from './store'
+import { Provider } from 'react-redux'
+
 createRoot(rootEl).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <HelmetProvider>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
-      </HelmetProvider>
-    </QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <HelmetProvider>
+          <AuthProvider>
+            <App />
+          </AuthProvider>
+        </HelmetProvider>
+      </QueryClientProvider>
+    </Provider>
   </StrictMode>,
 )
 

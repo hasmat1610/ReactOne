@@ -2,37 +2,34 @@ import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { SpeedInsights } from "@vercel/speed-insights/react"
 import { Helmet } from 'react-helmet-async'
 import LandingPage from './pages/LandingPage'
-import StitchGuide from './pages/StitchGuide'
+import StitchGuide from './pages/posts/StitchGuide'
 import Header from './components/landing/Header'
 import Footer from './components/landing/Footer'
 
-import GoogleAuth from './pages/GoogleAuth'
-import AuthFlowCode from './pages/AuthFlowCode'
-import FigmaMCP from './pages/FigmaMCP'
-import AxiosReact from './pages/AxiosReact'
-import TanStackQuery from './pages/TanStackQuery'
-import ReduxToolkit from './pages/ReduxToolkit'
-import ZustandGuide from './pages/ZustandGuide'
-import ReactQueryGuide from './pages/ReactQueryGuide'
-import ReactHookFormGuide from './pages/ReactHookFormGuide'
-import FormikGuide from './pages/FormikGuide'
+import GoogleAuth from './pages/posts/GoogleAuth'
+import AuthFlowCode from './pages/posts/AuthFlowCode'
+import FigmaMCP from './pages/posts/FigmaMCP'
+import AxiosReact from './pages/posts/AxiosReact'
+import TanStackQuery from "./pages/posts/TanStackQuery";
+import ReduxToolkit from "./pages/posts/ReduxToolkit";
+import ZustandGuide from "./pages/posts/ZustandGuide";
+import ReactQueryGuide from "./pages/posts/ReactQueryGuide";
+import ReactHookFormGuide from "./pages/posts/ReactHookFormGuide";
+import FormikGuide from './pages/posts/FormikGuide'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import ForgotPassword from './pages/ForgotPassword'
 import OtpVerification from './pages/OtpVerification'
 import Profile from './pages/Profile'
 import NotFound from './pages/NotFound'
-import BackendIntegration from './pages/BackendIntegration'
-
-import SupabaseGuide from './pages/SupabaseGuide'
-import SupabaseMCP from './pages/SupabaseMCP'
-import SupabaseAutomation from './pages/SupabaseAutomation'
-import MongoVsPostgres from './pages/MongoVsPostgres'
+import SupabaseMasterGuide from './pages/posts/SupabaseMasterGuide'
+import MongoVsPostgres from './pages/posts/MongoVsPostgres'
 import { getRouteSeo } from './seo/routesSeo'
 import AdminDashboard from './pages/AdminDashboard'
 import { AdminRoute } from './components/auth/AdminRoute'
 import Dashboard from './pages/Dashboard'
-import AxiosPostGuide from './pages/AxiosPostGuide'
+import AxiosPostGuide from './pages/posts/AxiosPostGuide'
+import BackendIntegration from './pages/posts/BackendIntegration'
 
 function AppContent() {
   const location = useLocation()
@@ -82,9 +79,7 @@ function AppContent() {
             />
             <Route path="/backend-integration" element={<BackendIntegration />} />
 
-            <Route path="/supabase-guide" element={<SupabaseGuide />} />
-            <Route path="/supabase-mcp" element={<SupabaseMCP />} />
-            <Route path="/supabase-automation" element={<SupabaseAutomation />} />
+            <Route path="/supabase-guide" element={<SupabaseMasterGuide />} />
             <Route path="/mongo-vs-postgres" element={<MongoVsPostgres />} />
             <Route path="/axios-post-guide" element={<AxiosPostGuide />} />
             <Route path="*" element={<NotFound />} />

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Code, ArrowLeft, Bot, Youtube } from 'lucide-react';
-import PromptBuilder from '../components/PromptBuilder';
-import StitchMentor from '../components/StitchMentor';
+import PromptBuilder from '../../components/PromptBuilder';
+import StitchMentor from '../../components/StitchMentor';
 
 const StitchGuide = () => {
   return (

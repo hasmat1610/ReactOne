@@ -1,15 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Shield, BookOpen, Terminal, FileCode, Layers, Braces } from 'lucide-react';
+import { ArrowRight, Shield, BookOpen, Terminal, FileCode, Layers, Braces, Database } from 'lucide-react';
 
 const guides = [
     { title: 'Auth Flow Code', desc: 'Login, signup & password reset', icon: Shield, color: 'from-blue-500/20 to-blue-600/20', border: 'border-blue-500/10', link: '/auth-flow-code' },
     { title: 'Google Auth', desc: 'OAuth 2.0 integration', icon: Shield, color: 'from-emerald-500/20 to-emerald-600/20', border: 'border-emerald-500/10', link: '/google-auth' },
     { title: 'Axios React', desc: 'HTTP client patterns', icon: Terminal, color: 'from-purple-500/20 to-purple-600/20', border: 'border-purple-500/10', link: '/axios-react' },
     { title: 'Redux Toolkit', desc: 'Global state management', icon: Layers, color: 'from-violet-500/20 to-violet-600/20', border: 'border-violet-500/10', link: '/redux-toolkit' },
+    { title: 'Supabase Master Guide', desc: 'Auth, DB, RLS & AI', icon: Database, color: 'from-emerald-500/20 to-emerald-600/20', border: 'border-emerald-500/10', link: '/supabase-guide' },
     { title: 'React Hook Form', desc: 'Form handling + Zod', icon: FileCode, color: 'from-sky-500/20 to-sky-600/20', border: 'border-sky-500/10', link: '/react-hook-form' },
-    { title: 'Zustand', desc: 'Lightweight state', icon: Braces, color: 'from-orange-500/20 to-orange-600/20', border: 'border-orange-500/10', link: '/zustand-guide' },
+    { title: 'Zustand', desc: 'Lightweight state', icon: Braces, color: 'from-orange-500/20 to-orange-600/20', border: 'border-orange-500/10', link: '/zustand' },
 ];
 
 const techLogos = [

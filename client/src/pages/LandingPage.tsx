@@ -4,7 +4,7 @@ import BuildAnythingSection from '../components/landing/BuildAnythingSection'
 import FAQSection from '../components/landing/FAQSection'
 import HardStuffSection from '../components/landing/HardStuffSection'
 import HeroSection from '../components/landing/HeroSection'
-
+import ExploreGuidesPhysics from '../components/landing/ExploreGuidesPhysics'
 import ScaleSection from '../components/landing/ScaleSection'
 import TestimonialsSection from '../components/landing/TestimonialsSection'
 
@@ -33,6 +33,7 @@ export default function LandingPage() {
         <BentoFeatures />
         <HardStuffSection />
         <ScaleSection />
+        <ExploreGuidesPhysics />
 
         <BuildAnythingSection />
         <TestimonialsSection />

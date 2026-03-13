@@ -79,9 +79,7 @@ const navMenus: NavMenu[] = [
     color: 'from-amber-400 to-orange-500',
     dotColor: 'bg-amber-400',
     items: [
-      { to: '/supabase-guide', icon: Database, title: 'Supabase Guide', desc: 'Auth, DB & RLS masterclass' },
-      { to: '/supabase-mcp', icon: Cpu, title: 'Supabase MCP', desc: 'Manage Supabase with AI' },
-      { to: '/supabase-automation', icon: Workflow, title: 'Automation', desc: 'AI-powered backend workflows' },
+      { to: '/supabase-guide', icon: Database, title: 'Supabase Master Guide', desc: 'Auth, DB, RLS & AI Automation' },
       { to: '/mongo-vs-postgres', icon: Layers, title: 'Mongo vs Postgres', desc: 'Document vs Relational debate' },
     ],
   },
