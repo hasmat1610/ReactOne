@@ -19,7 +19,7 @@ relatedArticles:
 */
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
 import { 
   Download, Copy, CheckCircle2, Code, Database, Shield, 
   Zap, Lock, Users, Globe, Terminal, Sparkles, 

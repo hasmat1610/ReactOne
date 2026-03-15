@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { ArrowRight, Shield, BookOpen, Terminal, FileCode, Layers, Braces, Database } from 'lucide-react';
 
 const guides = [

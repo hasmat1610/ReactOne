@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { Shield, Layers, TerminalSquare, FileText, Sparkles, Server, ArrowRight } from 'lucide-react';
 
 const useCases = [

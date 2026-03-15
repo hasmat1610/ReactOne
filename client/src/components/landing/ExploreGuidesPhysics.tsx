@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Matter from 'matter-js';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { ArrowRight, Plus, Search } from 'lucide-react';
 
 const GUIDE_TAGS = [
