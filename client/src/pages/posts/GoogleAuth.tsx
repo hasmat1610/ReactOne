@@ -8,7 +8,30 @@ import {
 } from 'lucide-react';
 
 // ━━━ STEP 1 DATA: Credential Setup Steps ━━━
-const setupSteps = [
+interface Instruction {
+  text: string;
+  link?: string;
+  label?: string;
+}
+
+interface StepData {
+  id: string;
+  stepNumber: string;
+  title: string;
+  icon: any;
+  accent: string;
+  image: string;
+  instructions: Instruction[];
+  warning?: string;
+  tip?: string;
+  tableData?: {
+    headers: string[];
+    rows: string[][];
+  };
+  codeSnippet?: string;
+}
+
+const setupSteps: StepData[] = [
   {
     id: 'create-project', stepNumber: '01', title: 'Create a Google Cloud Project',
     icon: Globe, accent: 'blue', image: '/images/blog/step1-create-project.png',
@@ -74,7 +97,15 @@ FRONTEND_URL=http://localhost:5173`
 ];
 
 // ━━━ STEP 2 DATA: Backend Code Snippets ━━━
-const backendSnippets = {
+type BackendSnippetKey = 'oauthClient' | 'initiateLogin' | 'handleCallback' | 'userModel' | 'routes';
+
+interface BackendSnippet {
+  title: string;
+  filename: string;
+  code: string;
+}
+
+const backendSnippets: Record<BackendSnippetKey, BackendSnippet> = {
   oauthClient: {
     title: 'OAuth Client Setup', filename: 'authController.js',
     code: `const { OAuth2Client } = require('google-auth-library');
@@ -240,7 +271,15 @@ module.exports = router;` },
 };
 
 // ━━━ STEP 3 DATA: React / Next.js Frontend Code ━━━
-const frontendSnippets = {
+type FrontendSnippetKey = 'useAuth' | 'loginPage' | 'protectedRoute' | 'appRouter' | 'profilePage';
+
+interface FrontendSnippet {
+  title: string;
+  filename: string;
+  code: string;
+}
+
+const frontendSnippets: Record<FrontendSnippetKey, FrontendSnippet> = {
   useAuth: {
     title: 'useAuth Hook', filename: 'hooks/useAuth.js',
     code: `import { useState, useEffect, createContext, useContext } from 'react';
@@ -418,7 +457,7 @@ const troubleshootingData = [
 ];
 
 // ━━━ Accent color helper ━━━
-const accentMap = {
+const accentMap: Record<string, { gradient: string; border: string; bg: string; text: string }> = {
   blue: { gradient: 'from-blue-500 to-cyan-500', border: 'border-blue-500/20', bg: 'bg-blue-500/10', text: 'text-blue-400' },
   emerald: { gradient: 'from-emerald-500 to-green-500', border: 'border-emerald-500/20', bg: 'bg-emerald-500/10', text: 'text-emerald-400' },
   violet: { gradient: 'from-violet-500 to-purple-500', border: 'border-violet-500/20', bg: 'bg-violet-500/10', text: 'text-violet-400' },
@@ -426,7 +465,7 @@ const accentMap = {
 };
 
 // ━━━ Reusable Sub-components ━━━
-const CodeBlock = ({ filename, code, onCopy, copied }) => (
+const CodeBlock = ({ filename, code, onCopy, copied }: { filename: string, code: string, onCopy: (text: string) => void, copied: boolean }) => (
   <div className="bg-[#0f172a] rounded-xl border border-white/10 overflow-hidden not-prose">
     <div className="flex items-center justify-between px-4 py-2 border-b border-white/5 bg-[#1e293b]">
       <div className="flex items-center gap-2">
@@ -450,14 +489,14 @@ const TABS = [
   { key: 'frontend', label: 'React / Next.js Code', icon: Layout, step: '3' },
 ];
 
-const GoogleAuth = () => {
+const GoogleAuth: React.FC = () => {
   const [activeTab, setActiveTab] = useState('credentials');
   const [activeCodeTab, setActiveCodeTab] = useState('oauthClient');
   const [activeFrontendTab, setActiveFrontendTab] = useState('useAuth');
-  const [expandedStep, setExpandedStep] = useState(null);
+  const [expandedStep, setExpandedStep] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = (text) => {
+  const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -536,6 +575,7 @@ const GoogleAuth = () => {
               {setupSteps.map((step) => {
                 const StepIcon = step.icon;
                 const a = accentMap[step.accent];
+                if (!a) return null;
                 const isOpen = expandedStep === step.id;
                 return (
                   <div key={step.id} className={`bg-[#111827] rounded-2xl border ${a.border} overflow-hidden transition-all duration-300`}>
@@ -556,7 +596,14 @@ const GoogleAuth = () => {
                           {step.instructions.map((inst, idx) => (
                             <div key={idx} className="flex items-start gap-3">
                               <div className={`w-6 h-6 rounded-full bg-gradient-to-br ${a.gradient} flex items-center justify-center shrink-0 mt-0.5`}><span className="text-white text-xs font-bold">{idx + 1}</span></div>
-                              <p className="text-slate-300 m-0 text-sm leading-relaxed">{inst.text}{inst.link && <a href={inst.link} target="_blank" rel="noopener noreferrer" className={`${a.text} hover:underline ml-1 inline-flex items-center gap-1`}>{inst.label} <ExternalLink className="w-3 h-3" /></a>}</p>
+                              <p className="text-slate-300 m-0 text-sm leading-relaxed">
+                                {inst.text}
+                                {inst.link && (
+                                  <a href={inst.link} target="_blank" rel="noopener noreferrer" className={`${a.text} hover:underline ml-1 inline-flex items-center gap-1`}>
+                                    {inst.label} <ExternalLink className="w-3 h-3" />
+                                  </a>
+                                )}
+                              </p>
                             </div>
                           ))}
                         </div>
@@ -593,18 +640,21 @@ const GoogleAuth = () => {
               <div className="lg:w-1/4">
                 <div className="sticky top-24 space-y-2">
                   <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 px-3">Code Files</h3>
-                  {Object.entries(backendSnippets).map(([key, data]) => (
-                    <button key={key} onClick={() => setActiveCodeTab(key)}
-                      className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl transition-all font-medium text-left text-sm ${activeCodeTab === key ? 'bg-rose-500/10 text-rose-400 border border-rose-500/20' : 'text-slate-400 hover:bg-white/5 border border-transparent'}`}
-                    >
-                      {key === 'userModel' ? <Database className="w-4 h-4 shrink-0" /> : <Code className="w-4 h-4 shrink-0" />}
-                      <span className="truncate">{data.title}</span>
-                    </button>
-                  ))}
+                  {Object.entries(backendSnippets).map(([key, data]) => {
+                    const snippetKey = key as BackendSnippetKey;
+                    return (
+                      <button key={key} onClick={() => setActiveCodeTab(key)}
+                        className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl transition-all font-medium text-left text-sm ${activeCodeTab === key ? 'bg-rose-500/10 text-rose-400 border border-rose-500/20' : 'text-slate-400 hover:bg-white/5 border border-transparent'}`}
+                      >
+                        {key === 'userModel' ? <Database className="w-4 h-4 shrink-0" /> : <Code className="w-4 h-4 shrink-0" />}
+                        <span className="truncate">{data.title}</span>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
               <div className="lg:w-3/4">
-                <CodeBlock filename={backendSnippets[activeCodeTab].filename} code={backendSnippets[activeCodeTab].code} onCopy={handleCopy} copied={copied} />
+                <CodeBlock filename={backendSnippets[activeCodeTab as BackendSnippetKey].filename} code={backendSnippets[activeCodeTab as BackendSnippetKey].code} onCopy={handleCopy} copied={copied} />
               </div>
             </div>
 
@@ -658,18 +708,21 @@ const GoogleAuth = () => {
               <div className="lg:w-1/4">
                 <div className="sticky top-24 space-y-2">
                   <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 px-3">Components</h3>
-                  {Object.entries(frontendSnippets).map(([key, data]) => (
-                    <button key={key} onClick={() => setActiveFrontendTab(key)}
-                      className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl transition-all font-medium text-left text-sm ${activeFrontendTab === key ? 'bg-sky-500/10 text-sky-400 border border-sky-500/20' : 'text-slate-400 hover:bg-white/5 border border-transparent'}`}
-                    >
-                      <Code className={`w-4 h-4 shrink-0 ${activeFrontendTab === key ? 'text-sky-400' : 'text-slate-500'}`} />
-                      <span className="truncate">{data.title}</span>
-                    </button>
-                  ))}
+                  {Object.entries(frontendSnippets).map(([key, data]) => {
+                    const snippetKey = key as FrontendSnippetKey;
+                    return (
+                      <button key={key} onClick={() => setActiveFrontendTab(key)}
+                        className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl transition-all font-medium text-left text-sm ${activeFrontendTab === key ? 'bg-sky-500/10 text-sky-400 border border-sky-500/20' : 'text-slate-400 hover:bg-white/5 border border-transparent'}`}
+                      >
+                        <Code className={`w-4 h-4 shrink-0 ${activeFrontendTab === key ? 'text-sky-400' : 'text-slate-500'}`} />
+                        <span className="truncate">{data.title}</span>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
               <div className="lg:w-3/4">
-                <CodeBlock filename={frontendSnippets[activeFrontendTab].filename} code={frontendSnippets[activeFrontendTab].code} onCopy={handleCopy} copied={copied} />
+                <CodeBlock filename={frontendSnippets[activeFrontendTab as FrontendSnippetKey].filename} code={frontendSnippets[activeFrontendTab as FrontendSnippetKey].code} onCopy={handleCopy} copied={copied} />
               </div>
             </div>
           </div>
@@ -726,6 +779,7 @@ const GoogleAuth = () => {
               { num: '04', title: 'Add Constraints', icon: Lock, color: 'amber', desc: 'Define UX patterns, error handling, loading states, and integration rules to prevent the AI from generating incomplete components.', example: '"Include loading spinner during session check, redirect unauthenticated users to /login, and use withCredentials: true for all axios calls"' },
             ].map((card) => {
               const cardAccent = accentMap[card.color];
+              if (!cardAccent) return null;
               return (
                 <div key={card.num} className="bg-[#111827] rounded-2xl border border-white/5 p-5 hover:border-white/10 transition-colors">
                   <div className="flex items-center gap-3 mb-3">

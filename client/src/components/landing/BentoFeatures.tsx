@@ -245,7 +245,3 @@ const BentoFeatures = () => {
 };
 
 export default BentoFeatures;
-  );
-};
-
-export default BentoFeatures;

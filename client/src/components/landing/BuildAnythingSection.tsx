@@ -135,4 +135,3 @@ const BuildAnythingSection = () => {
 };
 
 export default BuildAnythingSection;
-export default BuildAnythingSection;

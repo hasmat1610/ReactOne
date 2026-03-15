@@ -296,4 +296,3 @@ const ExploreGuidesPhysics = () => {
 };
 
 export default ExploreGuidesPhysics;
-export default ExploreGuidesPhysics;

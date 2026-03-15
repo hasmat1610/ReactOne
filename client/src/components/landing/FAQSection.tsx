@@ -65,4 +65,3 @@ const FAQSection = () => {
 };
 
 export default FAQSection;
-export default FAQSection;

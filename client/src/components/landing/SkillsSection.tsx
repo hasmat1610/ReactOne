@@ -181,7 +181,7 @@ const skillCategories = [
 ];
 
 const SkillsSection = () => {
-  const [activeTab, setActiveTab] = useState(skillCategories[1].id);
+  const [activeTab, setActiveTab] = useState(skillCategories[1]?.id || 'frontend');
 
   return (
     <section className="py-24 relative overflow-hidden bg-[#000000]">
@@ -206,7 +206,7 @@ const SkillsSection = () => {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-4"
           >
-            Mastering the <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#216be4] to-cyan-400">Modern Stack</span>
+            Mastering the <span className="text-transparent bg-clip-text bg-linear-to-r from-[#216be4] to-cyan-400">Modern Stack</span>
           </motion.h2>
         </div>
 
@@ -324,5 +324,4 @@ const SkillsSection = () => {
   );
 };
 
-export default SkillsSection;
 export default SkillsSection;

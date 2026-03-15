@@ -1,26 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Figma, Cpu, MoveRight, Sparkles, Box, Code, Layers } from 'lucide-react';
-import HeroBanner from '../../components/blog/HeroBanner';
+import HeroBanner from '@/components/blog/HeroBanner';
 
-const FigmaMCP = () => {
+const FigmaMCP: React.FC = () => {
     return (
         <div className="min-h-screen bg-[#0a0f18] text-slate-200 font-sans pb-24 selection:bg-pink-500/30">
 
-            {/* ── Hero Banner ── */}
+             {/* ── Hero Banner ── */}
             <HeroBanner
-                badgeText="Setup Guide"
-                badgeIcon={Figma}
+                badgeText="Implementation Ready"
+                badgeIcon={Code}
                 title="Figma MCP Setup"
                 subtitle="Configure Figma MCP server on Google Antigravity"
-                date="Mar 4, 2026"
-                gradientContainer="from-[#1a1a2e] via-pink-900/20 to-[#0a0f18]"
-                radialBackground="radial-gradient(circle at 50% 120%, rgba(236, 72, 153, 0.4), transparent 50%), radial-gradient(circle at 10% 20%, rgba(219, 39, 119, 0.3), transparent 30%)"
-                badgeContainerStyles="border border-pink-500/30 bg-pink-500/10"
-                badgeTextStyles="text-pink-400"
+                date="Mar 06, 2026"
+                gradientContainer="from-slate-900 via-blue-900/60 to-[#0a0f18]"
+                radialBackground="radial-gradient(circle at 50% 120%, rgba(0, 85, 255, 0.4), transparent 50%), radial-gradient(circle at 10% 20%, rgba(45, 120, 255, 0.3), transparent 30%)"
+                badgeContainerStyles="border border-blue-500/30 bg-blue-500/10"
+                badgeTextStyles="text-blue-400"
                 titleGradient="from-white to-white/60"
-                subtitleColor="text-pink-300/70"
-                avatarRing="from-pink-500 to-purple-600"
+                subtitleColor="text-blue-300/70"
+                avatarRing="from-indigo-400 to-blue-600"
                 dateColor="text-slate-400"
             />
 
@@ -115,11 +115,11 @@ const FigmaMCP = () => {
                             </div>
                         </div>
                         <div className="p-5 overflow-x-auto">
-                            <pre className="text-[15px] font-mono text-slate-300 m-0 bg-transparent p-0"><code>dotenv.config(&#123; path: path.resolve(__dirname, ".env") &#125;);</code></pre>
+                            <pre className="text-[15px] font-mono text-slate-300 m-0 bg-transparent p-0"><code>{`dotenv.config({ path: path.resolve(__dirname, ".env") });`}</code></pre>
                         </div>
                     </div>
 
-                    <ol className="list-decimal pl-6 space-y-3 mb-6 text-slate-300 marker:text-slate-500" start="4">
+                    <ol className="list-decimal pl-6 space-y-3 mb-6 text-slate-300 marker:text-slate-500" start={4}>
                         <li><strong>Comment it out</strong> by adding <code className="bg-white/10 px-1.5 py-0.5 rounded text-sm font-mono text-sky-300">//</code> at the beginning:</li>
                     </ol>
 
@@ -136,11 +136,11 @@ const FigmaMCP = () => {
                             </div>
                         </div>
                         <div className="p-5 overflow-x-auto">
-                            <pre className="text-[15px] font-mono text-emerald-400 m-0 bg-transparent p-0"><code>// dotenv.config(&#123; path: path.resolve(__dirname, ".env") &#125;);</code></pre>
+                            <pre className="text-[15px] font-mono text-emerald-400 m-0 bg-transparent p-0"><code>{`// dotenv.config({ path: path.resolve(__dirname, ".env") });`}</code></pre>
                         </div>
                     </div>
 
-                    <ol className="list-decimal pl-6 space-y-3 mb-10 text-slate-300 marker:text-slate-500" start="5">
+                    <ol className="list-decimal pl-6 space-y-3 mb-10 text-slate-300 marker:text-slate-500">
                         <li>Save the file.</li>
                     </ol>
 
@@ -242,9 +242,9 @@ const FigmaMCP = () => {
                                 <div className="w-48 h-64 bg-slate-800 rounded-xl shadow-xl flex flex-col items-center justify-center">
                                     <div className="w-32 h-32 bg-slate-700/50 rounded-lg mb-6 border border-slate-600/50 flex items-center justify-center p-2">
                                         <div className="w-full h-full border border-slate-500 border-dashed rounded flex flex-wrap gap-[6px] p-2">
-                                            <div className="w-3 h-3 bg-slate-500/50 rounded-sm" />
-                                            <div className="w-3 h-3 bg-slate-500/50 rounded-sm" />
-                                            <div className="w-3 h-3 bg-slate-500/50 rounded-sm" />
+                                            <div className="w-3 h-3 rounded-full bg-slate-500/50 rounded-sm" />
+                                            <div className="w-3 h-3 rounded-full bg-slate-500/50 rounded-sm" />
+                                            <div className="w-3 h-3 rounded-full bg-slate-500/50 rounded-sm" />
                                         </div>
                                     </div>
                                     <div className="w-3/4 h-3 bg-slate-600/50 rounded-full mb-3"></div>

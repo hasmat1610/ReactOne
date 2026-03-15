@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import ChatbotUI from '../ChatbotUI';
 import { SplineSceneBasic } from '../ui/spline-demo';
 import LoveButton from '../ui/LoveButton';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -17,7 +17,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
