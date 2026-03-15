@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Zap, ArrowLeft, Cpu } from 'lucide-react';
+import { Zap, ArrowLeft, LucideIcon } from 'lucide-react';
+import HeroBanner from './HeroBanner';
 
 interface Author {
   name: string;
@@ -17,7 +18,15 @@ interface PostLayoutProps {
   readingTime: string;
   author: Author;
   children: React.ReactNode;
-  heroIcon?: React.ReactNode;
+  badgeIcon: LucideIcon;
+  gradientContainer?: string;
+  radialBackground?: string;
+  badgeContainerStyles?: string;
+  badgeTextStyles?: string;
+  titleGradient?: string;
+  subtitleColor?: string;
+  avatarRing?: string;
+  dateColor?: string;
 }
 
 const PostLayout: React.FC<PostLayoutProps> = ({
@@ -28,7 +37,15 @@ const PostLayout: React.FC<PostLayoutProps> = ({
   readingTime,
   author,
   children,
-  heroIcon = <Cpu className="w-24 h-24 text-amber-400 animate-pulse opacity-50" />
+  badgeIcon,
+  gradientContainer,
+  radialBackground,
+  badgeContainerStyles,
+  badgeTextStyles,
+  titleGradient,
+  subtitleColor,
+  avatarRing,
+  dateColor
 }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -69,45 +86,28 @@ const PostLayout: React.FC<PostLayoutProps> = ({
         </div>
       </header>
 
+      {/* Article Hero Banner */}
+      <HeroBanner
+        badgeText={category}
+        badgeIcon={badgeIcon}
+        title={title}
+        subtitle={description}
+        date={date}
+        gradientContainer={gradientContainer}
+        radialBackground={radialBackground}
+        badgeContainerStyles={badgeContainerStyles}
+        badgeTextStyles={badgeTextStyles}
+        titleGradient={titleGradient}
+        subtitleColor={subtitleColor}
+        avatarRing={avatarRing}
+        dateColor={dateColor}
+      />
+
       {/* Main Content Area */}
-      <div className="container mx-auto px-[24px] max-w-[1280px] pt-[120px] pb-[56px]">
+      <div className="container mx-auto px-[24px] max-w-[1280px] pb-[56px]">
         
         {/* Article Container (720px) centered */}
         <div className="max-w-[720px] mx-auto">
-          
-          {/* Article Hero Section */}
-          <div className="mb-[40px]">
-            {/* Category Badge */}
-            <div className="inline-flex items-center px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-400 mb-[16px] font-medium text-[14px]">
-              {category}
-            </div>
-
-            {/* H1 Title */}
-            <h1 className="text-[48px] font-[800] text-white my-[16px] leading-[1.1] tracking-tight">
-              {title}
-            </h1>
-
-            {/* Premium Author Block Design */}
-            <div className="flex items-center gap-4 mt-[32px] mb-[40px]">
-              <div className="w-12 h-12 rounded-full border-2 border-white/10 overflow-hidden shadow-lg">
-                <img src={author.avatar} alt={author.name} className="w-full h-full object-cover" />
-              </div>
-              <div className="flex-1">
-                <div className="font-bold text-white text-[16px]">{author.name}</div>
-                <div className="text-slate-500 text-[14px]">{author.role}</div>
-              </div>
-              <div className="text-right text-slate-500 text-[14px]">
-                <div>{date}</div>
-                <div>• {readingTime}</div>
-              </div>
-            </div>
-
-            {/* Hero Image */}
-            <div className="w-full aspect-[16/9] bg-gradient-to-br from-slate-900 to-amber-900/40 rounded-2xl overflow-hidden border border-white/10 flex items-center justify-center relative shadow-2xl transition-transform hover:scale-[1.01] duration-500">
-              {heroIcon}
-              <div className="absolute inset-0 bg-black/20"></div>
-            </div>
-          </div>
 
           {/* Article Reading Column */}
           <article className="max-w-[65ch] prose prose-invert prose-lg">
@@ -128,3 +128,4 @@ const PostLayout: React.FC<PostLayoutProps> = ({
 };
 
 export default PostLayout;
+

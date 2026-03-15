@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Code, Copy, CheckCircle2, Lock, Mail, KeyRound, UserPlus } from 'lucide-react';
+import HeroBanner from '../../components/blog/HeroBanner';
 
 const AuthFlowCode = () => {
   const [activeTab, setActiveTab] = useState('signup');
@@ -522,52 +523,27 @@ export const verifyOTPURL = async (data: any) => {
       {/* Navigation Bar */}
 
 
+      {/* ── Hero Banner ── */}
+      <HeroBanner
+        badgeText="Implementation Ready"
+        badgeIcon={Code}
+        title="Authentication Flow"
+        subtitle="Complete Code Snippets"
+        date="Mar 06, 2026"
+        gradientContainer="from-slate-900 via-sky-900 to-[#0a0f18]"
+        radialBackground="radial-gradient(circle at 50% 120%, rgba(59, 130, 246, 0.4), transparent 50%), radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.3), transparent 30%)"
+        badgeContainerStyles="border border-sky-500/30 bg-sky-500/10"
+        badgeTextStyles="text-sky-400"
+        titleGradient="from-white to-white/60"
+        subtitleColor="text-sky-300/70"
+        avatarRing="from-indigo-400 to-sky-600"
+        dateColor="text-slate-400"
+      />
+
       {/* Article Content */}
-      <main className="container mx-auto px-4 max-w-3xl pt-32 pb-16">
-
-        {/* Banner Image Prototype */}
-        <div className="w-full h-64 md:h-80 bg-gradient-to-br from-slate-900 via-sky-900 to-[#0a0f18] rounded-3xl mb-10 overflow-hidden relative flex items-center justify-center border border-white/10">
-          {/* Abstract Pattern */}
-          <div className="absolute inset-0 opacity-40 mix-blend-screen" style={{
-            background: `radial-gradient(circle at 50% 120%, rgba(59, 130, 246, 0.4), transparent 50%), radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.3), transparent 30%)`
-          }}></div>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-[120%] h-[120%] animate-spin-slow opacity-20" style={{
-              background: `conic-gradient(from 0deg, transparent 0 340deg, white 360deg)`,
-              maskImage: 'radial-gradient(circle, transparent 30%, black 70%)',
-              WebkitMaskImage: 'radial-gradient(circle, transparent 30%, black 70%)'
-            }}></div>
-          </div>
-
-          <h1 className="text-5xl md:text-7xl font-extrabold text-white drop-shadow-2xl z-10 tracking-widest relative">
-            <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">Auth Flow</span>
-          </h1>
-        </div>
+      <main className="container mx-auto px-4 max-w-3xl pb-16">
 
         <article className="prose prose-invert prose-lg max-w-none">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-sky-500/30 bg-sky-500/10 text-sky-400 mb-6 font-medium text-sm">
-            <Code className="w-4 h-4" />
-            <span>Implementation Ready</span>
-          </div>
-
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight tracking-tight">Authentication Flow Code Snippets</h1>
-
-          {/* Author Meta */}
-          <div className="flex items-center gap-4 mb-10 text-sm">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-400 to-sky-600 flex items-center justify-center p-[2px]">
-              <div className="w-full h-full rounded-full bg-black flex items-center justify-center overflow-hidden">
-                <img src="https://i.pravatar.cc/150?img=33" alt="Author" className="w-full h-full object-cover" />
-              </div>
-            </div>
-            <div>
-              <div className="font-bold text-white text-base">Hasmat Patel</div>
-              <div className="text-slate-400">UI Developer</div>
-            </div>
-            <div className="text-slate-500 ml-auto flex items-center gap-4">
-              <span>Mar 06, 2026</span>
-              <span className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-slate-500"></span> 6 min read</span>
-            </div>
-          </div>
 
           <p className="text-slate-300 leading-relaxed mb-8 text-lg">
             Building a complete authentication flow involves several moving pieces—from initial registration to securely handling JWT tokens and integrating optional security layers like OTP verification.
@@ -687,3 +663,4 @@ export const verifyOTPURL = async (data: any) => {
 };
 
 export default AuthFlowCode;
+

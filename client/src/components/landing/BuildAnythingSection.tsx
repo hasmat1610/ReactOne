@@ -57,7 +57,7 @@ const useCases = [
 const BuildAnythingSection = () => {
     return (
         <section className="py-32 relative overflow-hidden bg-black/40 border-t border-white/5">
-            <div className="container mx-auto px-4 relative z-10 max-w-7xl">
+            <div className="container mx-auto px-4 relative z-10 max-w-6xl">
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -74,16 +74,30 @@ const BuildAnythingSection = () => {
                 </motion.div>
 
                 {/* Use-Case Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.1 }}
+                    variants={{
+                        hidden: {},
+                        visible: {
+                            transition: {
+                                staggerChildren: 0.1
+                            }
+                        }
+                    }}
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                >
                     {useCases.map((item, index) => {
                         const Icon = item.icon;
                         return (
                             <motion.div
                                 key={item.title}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.08 }}
+                                variants={{
+                                    hidden: { opacity: 0, y: 20 },
+                                    visible: { opacity: 1, y: 0 }
+                                }}
+                                transition={{ type: "spring", stiffness: 100, damping: 15 }}
                             >
                                 <Link
                                     to={item.link}
@@ -114,10 +128,11 @@ const BuildAnythingSection = () => {
                             </motion.div>
                         );
                     })}
-                </div>
+                </motion.div>
             </div>
         </section>
     );
 };
 
+export default BuildAnythingSection;
 export default BuildAnythingSection;

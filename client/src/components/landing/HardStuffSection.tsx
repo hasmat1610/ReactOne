@@ -103,18 +103,23 @@ const HardStuffSection = () => {
                     <div className="w-12 h-12 bg-white/5 rounded-xl mx-auto mb-4 border border-white/10 flex items-center justify-center">
                       <Shield className="w-6 h-6 text-zinc-400" />
                     </div>
-                    <h3 className="text-xl font-medium text-white">Welcome back</h3>
-                    <p className="text-sm text-zinc-500 mt-1">Google OAuth + Email/Password</p>
+                    <h3 className="text-xl font-bold text-white tracking-tight">Enterprise Auth</h3>
+                    <p className="text-sm text-zinc-500 mt-1">Multi-factor (MFA) + Role-based Access</p>
                   </div>
                   <div className="space-y-4">
-                    <div className="h-11 rounded-lg bg-white/5 border border-white/10 w-full flex items-center justify-center gap-2 text-sm text-zinc-400">
+                    <div className="h-11 rounded-lg bg-white/5 border border-white/10 w-full flex items-center justify-center gap-2 text-sm text-zinc-300 font-medium hover:bg-white/10 transition-colors cursor-pointer">
                       <svg className="w-4 h-4" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" /></svg>
-                      Sign in with Google
+                      Continue with Google
+                    </div>
+                    <div className="relative">
+                      <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-white/5"></div></div>
+                      <div className="relative flex justify-center text-[10px] uppercase tracking-widest"><span className="bg-[#1A1A1A] px-2 text-zinc-600">or use security key</span></div>
                     </div>
                     <div className="h-11 rounded-lg bg-white/5 border border-white/10 w-full flex items-center px-4">
-                      <div className="w-24 h-2 bg-zinc-600 rounded-full" />
+                      <div className="w-2 h-2 rounded-full bg-emerald-500 mr-3 animate-pulse" />
+                      <div className="w-24 h-2 bg-zinc-700 rounded-full" />
                     </div>
-                    <div className="h-11 rounded-lg bg-[#216be4] w-full mt-2 opacity-90 flex items-center justify-center text-white text-sm font-medium">Sign In</div>
+                    <div className="h-11 rounded-lg bg-[#216be4] w-full mt-2 flex items-center justify-center text-white text-sm font-bold shadow-[0_4px_12px_rgba(33,107,228,0.4)]">Authenticate</div>
                   </div>
                 </motion.div>
               )}
@@ -133,16 +138,23 @@ const HardStuffSection = () => {
                     <span className="text-white font-semibold">Zustand Store</span>
                     <span className="text-[10px] px-2 py-0.5 rounded-full bg-orange-400/10 text-orange-400 border border-orange-400/20 font-semibold">~1KB</span>
                   </div>
-                  <pre className="text-[13px] font-mono text-zinc-400 leading-relaxed">
+                  <pre className="text-[13px] font-mono text-zinc-300 leading-relaxed overflow-x-auto scrollbar-hide">
                     {`import { create } from 'zustand';
+import { persist, devtools } from 'zustand/middleware';
 
-const useStore = create((set) => ({
-  count: 0,
-  increment: () => set((s) => ({ 
-    count: s.count + 1 
-  })),
-  reset: () => set({ count: 0 }),
-}));`}
+const useAuthStore = create(
+  devtools(
+    persist(
+      (set) => ({
+        user: null,
+        isAuth: false,
+        login: (userData) => set({ user: userData, isAuth: true }),
+        logout: () => set({ user: null, isAuth: false }),
+      }),
+      { name: 'auth-storage' }
+    )
+  )
+);`}
                   </pre>
                 </motion.div>
               )}
@@ -160,16 +172,20 @@ const useStore = create((set) => ({
                     <FileText className="w-5 h-5 text-[#216be4]" />
                     <span className="text-white font-semibold">React Hook Form + Zod</span>
                   </div>
-                  <pre className="text-[13px] font-mono text-zinc-400 leading-relaxed">
-                    {`const { register, handleSubmit } = useForm({
-  resolver: zodResolver(schema),
+                  <pre className="text-[13px] font-mono text-zinc-300 leading-relaxed overflow-x-auto scrollbar-hide">
+                    {`const schema = z.object({
+  email: z.string().email('Invalid email format'),
+  password: z.string().min(8, 'Minimum 8 chars'),
 });
 
-<form onSubmit={handleSubmit(onSubmit)}>
-  <input {...register('email')} />
-  {errors.email && <p>{errors.email.message}</p>}
-  <button type="submit">Submit</button>
-</form>`}
+const { register, handleSubmit, formState: { errors } } = useForm({
+  resolver: zodResolver(schema),
+  mode: 'onChange'
+});
+
+const onSubmit = async (data) => {
+  await authService.login(data.email, data.password);
+};`}
                   </pre>
                 </motion.div>
               )}
@@ -187,17 +203,19 @@ const useStore = create((set) => ({
                     <TerminalSquare className="w-5 h-5 text-[#216be4]" />
                     <span className="text-white font-semibold">Axios + React Query</span>
                   </div>
-                  <pre className="text-[13px] font-mono text-zinc-400 leading-relaxed">
-                    {`const api = axios.create({
-  baseURL: '/api',
-  timeout: 10000,
-});
-
-const { data, isLoading } = useQuery({
-  queryKey: ['users'],
-  queryFn: () => api.get('/users'),
-  staleTime: 5 * 60 * 1000,
-});`}
+                  <pre className="text-[13px] font-mono text-zinc-300 leading-relaxed overflow-x-auto scrollbar-hide">
+                    {`// Standardized API patterns
+export const useUsers = (filters) => {
+  return useQuery({
+    queryKey: ['users', filters],
+    queryFn: async () => {
+      const { data } = await api.get('/users', { params: filters });
+      return data;
+    },
+    staleTime: 1000 * 60 * 5,
+    retry: 3,
+  });
+};`}
                   </pre>
                 </motion.div>
               )}

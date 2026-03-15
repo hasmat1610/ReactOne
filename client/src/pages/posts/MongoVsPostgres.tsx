@@ -28,6 +28,7 @@ import {
   ShieldCheck, ArrowRight, Settings
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import HeroBanner from '../../components/blog/HeroBanner';
 
 interface GuideFile {
     name: string;
@@ -198,51 +199,26 @@ const MongoVsPostgres = () => {
 
     return (
         <div className="min-h-screen bg-[#080B16] text-slate-200 font-sans pb-24 selection:bg-indigo-500/30">
+            {/* ── Hero Banner ── */}
+            <HeroBanner
+                badgeText="Database Selection Strategy"
+                badgeIcon={Database}
+                title="MongoDB vs PostgreSQL"
+                subtitle="Complete Guide to Database Selection in 2026"
+                date="Updated Mar 11, 2026"
+                gradientContainer="from-[#1A1A2E] via-[#4F46E5]/20 to-[#080B16]"
+                radialBackground="radial-gradient(circle at 50% 120%, rgba(79, 70, 229, 0.4), transparent 50%), radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.3), transparent 30%)"
+                badgeContainerStyles="border border-indigo-500/30 bg-indigo-500/10"
+                badgeTextStyles="text-indigo-400"
+                titleGradient="from-white to-white/60"
+                subtitleColor="text-indigo-300/70"
+                avatarRing="from-indigo-400 to-purple-600"
+                dateColor="text-slate-400"
+            />
+
             {/* 1. Header & Introduction */}
-            <div className="container mx-auto px-4 max-w-4xl pt-32 pb-16">
-                <div className="w-full h-64 md:h-80 bg-gradient-to-br from-[#1A1A2E] via-[#4F46E5]/20 to-[#080B16] rounded-3xl mb-10 overflow-hidden relative flex items-center justify-center border border-white/10">
-                    <div className="absolute inset-0 opacity-40 mix-blend-screen" style={{
-                        background: "radial-gradient(circle at 50% 120%, rgba(79, 70, 229, 0.4), transparent 50%), radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.3), transparent 30%)"
-                    }}></div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-[120%] h-[120%] animate-spin-slow opacity-20" style={{
-                            background: "conic-gradient(from 0deg, transparent 0 340deg, white 360deg)",
-                            maskImage: 'radial-gradient(circle, transparent 30%, black 70%)',
-                            WebkitMaskImage: 'radial-gradient(circle, transparent 30%, black 70%)'
-                        }}></div>
-                    </div>
-                    
-                    <h1 className="text-4xl md:text-7xl font-extrabold text-white drop-shadow-2xl z-10 tracking-widest relative px-4 text-center leading-tight">
-                        <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 text-center">MongoDB vs PostgreSQL</span>
-                    </h1>
-                </div>
-
+            <div className="container mx-auto px-4 max-w-4xl pb-16">
                 <article className="prose prose-invert prose-lg max-w-none">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-400 mb-6 font-medium text-sm">
-                        <Database className="w-4 h-4" />
-                        <span>Database Selection Strategy</span>
-                    </div>
-
-                    <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight tracking-tight">
-                        MongoDB vs PostgreSQL: Complete Guide to Database Selection in 2026
-                    </h1>
-
-                    <div className="flex items-center gap-4 mb-10 text-sm not-prose">
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-400 to-purple-600 flex items-center justify-center p-[2px]">
-                            <div className="w-full h-full rounded-full bg-black flex items-center justify-center overflow-hidden border border-white/10">
-                                <img src="https://i.pravatar.cc/150?img=33" alt="Author" className="w-full h-full object-cover" />
-                            </div>
-                        </div>
-                        <div>
-                            <div className="font-bold text-white text-base">Hasmat Patel</div>
-                            <div className="text-slate-400">Database Architect • ReactOne Engineering</div>
-                        </div>
-                        <div className="text-slate-500 ml-auto flex items-center gap-4">
-                            <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> 15 min read</span>
-                            <div className="h-4 w-px bg-white/10 hidden sm:block"></div>
-                            <span className="hidden sm:inline">Updated Mar 11, 2026</span>
-                        </div>
-                    </div>
 
                     {/* Table of Contents */}
                     <div className="bg-[#0a0f1d] border border-white/10 rounded-2xl p-6 mb-12 not-prose">
@@ -814,3 +790,4 @@ const MongoVsPostgres = () => {
 };
 
 export default MongoVsPostgres;
+

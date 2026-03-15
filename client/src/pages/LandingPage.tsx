@@ -1,12 +1,16 @@
-import { useEffect } from 'react'
-import BentoFeatures from '../components/landing/BentoFeatures'
-import BuildAnythingSection from '../components/landing/BuildAnythingSection'
-import FAQSection from '../components/landing/FAQSection'
-import HardStuffSection from '../components/landing/HardStuffSection'
-import HeroSection from '../components/landing/HeroSection'
-import ExploreGuidesPhysics from '../components/landing/ExploreGuidesPhysics'
-import ScaleSection from '../components/landing/ScaleSection'
-import TestimonialsSection from '../components/landing/TestimonialsSection'
+import { useEffect, lazy, Suspense } from 'react'
+
+const HeroSection = lazy(() => import('../components/landing/HeroSection'))
+const BentoFeatures = lazy(() => import('../components/landing/BentoFeatures'))
+const BuildAnythingSection = lazy(() => import('../components/landing/BuildAnythingSection'))
+const FAQSection = lazy(() => import('../components/landing/FAQSection'))
+const ExploreGuidesPhysics = lazy(() => import('../components/landing/ExploreGuidesPhysics'))
+const TestimonialsSection = lazy(() => import('../components/landing/TestimonialsSection'))
+const SkillsSection = lazy(() => import('../components/landing/SkillsSection'))
+
+const SectionSkeleton = () => (
+  <div className="w-full h-[400px] bg-black/20 animate-pulse rounded-3xl" />
+)
 
 export default function LandingPage() {
   useEffect(() => {
@@ -29,15 +33,33 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-[#0B0D10] font-sans text-[#E9EEF5] overflow-x-hidden">
       <div className="relative pt-16">
-        <HeroSection />
-        <BentoFeatures />
-        <HardStuffSection />
-        <ScaleSection />
-        <ExploreGuidesPhysics />
+        <Suspense fallback={<div className="h-screen" />}>
+          <HeroSection />
+        </Suspense>
+        
+        <Suspense fallback={<SectionSkeleton />}>
+          <BentoFeatures />
+        </Suspense>
 
-        <BuildAnythingSection />
-        <TestimonialsSection />
-        <FAQSection />
+        <Suspense fallback={<SectionSkeleton />}>
+          <SkillsSection />
+        </Suspense>
+
+        <Suspense fallback={<div className="h-[400px]" />}>
+          <ExploreGuidesPhysics />
+        </Suspense>
+
+        <Suspense fallback={<SectionSkeleton />}>
+          <BuildAnythingSection />
+        </Suspense>
+
+        {/* <Suspense fallback={<SectionSkeleton />}>
+          <TestimonialsSection />
+        </Suspense> */}
+
+        <Suspense fallback={<SectionSkeleton />}>
+          <FAQSection />
+        </Suspense>
       </div>
     </div>
   )

@@ -1,6 +1,7 @@
+import React, { useState } from 'react';
 import { useAppSelector } from '../../store/hooks';
 import PostLayout from '../../components/blog/PostLayout';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Layers } from 'lucide-react';
 
 const ZustandGuide = () => {
     const [isCopied, setIsCopied] = useState(false);
@@ -22,6 +23,15 @@ const ZustandGuide = () => {
             date={post.date}
             readingTime={post.readingTime}
             author={post.author}
+            badgeIcon={Layers}
+            gradientContainer="from-slate-900 via-yellow-900/40 to-[#0a0f18]"
+            radialBackground="radial-gradient(circle at 50% 120%, rgba(250, 204, 21, 0.4), transparent 50%), radial-gradient(circle at 10% 20%, rgba(202, 138, 4, 0.3), transparent 30%)"
+            badgeContainerStyles="border border-yellow-500/30 bg-yellow-500/10"
+            badgeTextStyles="text-yellow-400"
+            titleGradient="from-white to-white/60"
+            subtitleColor="text-yellow-300/70"
+            avatarRing="from-yellow-400 to-amber-600"
+            dateColor="text-slate-400"
         >
             <h2 className="text-[32px] font-[700] text-white mt-[56px] mb-[24px]">Introduction</h2>
             <p className="text-[18px] font-[400] leading-[1.6] text-slate-300 mb-[16px]">

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Code, ArrowLeft, Bot, Youtube } from 'lucide-react';
+import { Code, ArrowLeft, Bot, Youtube, Cpu } from 'lucide-react';
 import PromptBuilder from '../../components/PromptBuilder';
 import StitchMentor from '../../components/StitchMentor';
+import HeroBanner from '../../components/blog/HeroBanner';
 
 const StitchGuide = () => {
   return (
@@ -10,58 +11,27 @@ const StitchGuide = () => {
       {/* Navigation Bar */}
 
 
+            {/* ── Hero Banner ── */}
+            <HeroBanner
+                badgeText="Implementation Ready"
+                badgeIcon={Code}
+                title="Stitch"
+                subtitle="Google Stitch For UI Design"
+                date="Nov 12, 2023"
+                gradientContainer="from-indigo-900 via-purple-900/60 to-[#0a0f18]"
+                radialBackground="radial-gradient(circle at 50% 120%, rgba(120, 119, 198, 0.4), transparent 50%), radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.3), transparent 30%)"
+                badgeContainerStyles="border border-sky-500/30 bg-sky-500/10"
+                badgeTextStyles="text-sky-400"
+                titleGradient="from-white to-white/60"
+                subtitleColor="text-sky-300/70"
+                avatarRing="from-sky-400 to-purple-600"
+                dateColor="text-slate-400"
+            />
+
       {/* Article Content */}
-      <main className="container mx-auto px-4 max-w-3xl pt-32 pb-16">
-
-        {/* Banner Image Prototype */}
-        <div className="w-full h-64 md:h-80 bg-gradient-to-br from-indigo-900 via-purple-900 to-[#0a0f18] rounded-3xl mb-10 overflow-hidden relative flex items-center justify-center border border-white/10">
-          {/* Abstract Wave Pattern */}
-          <div className="absolute inset-0 opacity-40 mix-blend-screen" style={{
-            background: `radial-gradient(circle at 50% 120%, rgba(120, 119, 198, 0.4), transparent 50%), radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.3), transparent 30%)`
-          }}></div>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-[120%] h-[120%] animate-spin-slow opacity-20" style={{
-              background: `conic-gradient(from 0deg, transparent 0 340deg, white 360deg)`,
-              maskImage: 'radial-gradient(circle, transparent 30%, black 70%)',
-              WebkitMaskImage: 'radial-gradient(circle, transparent 30%, black 70%)'
-            }}></div>
-          </div>
-
-          <h1 className="text-5xl md:text-7xl font-extrabold text-white drop-shadow-2xl z-10 tracking-widest relative">
-            <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">Stitch</span>
-          </h1>
-        </div>
-
-
+      <main className="container mx-auto px-4 max-w-3xl pb-16">
 
         <article className="prose prose-invert prose-lg max-w-none">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-sky-500/30 bg-sky-500/10 text-sky-400 mb-6 font-medium text-sm">
-            <Code className="w-4 h-4" />
-            <span>Implementation Ready</span>
-          </div>
-
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight tracking-tight">Google Stitch For UI Design</h1>
-
-
-
-
-          {/* Author Meta */}
-          <div className="flex items-center gap-4 mb-10 text-sm">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-sky-400 to-purple-600 flex items-center justify-center p-[2px]">
-              <div className="w-full h-full rounded-full bg-black flex items-center justify-center overflow-hidden">
-                <img src="https://i.pravatar.cc/150?img=11" alt="Author" className="w-full h-full object-cover" />
-              </div>
-            </div>
-            <div>
-              <div className="font-bold text-white text-base">Travis Miller</div>
-              <div className="text-slate-400">Product Designer</div>
-            </div>
-            <div className="text-slate-500 ml-auto flex items-center gap-4">
-              <span>Nov 12, 2023</span>
-              <span className="flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-slate-500"></span> 5 min read</span>
-            </div>
-          </div>
-
           <p className="text-slate-300 leading-relaxed mb-8 text-lg">
             Whether you are building a SaaS dashboard or a simple landing page, speeding up the UI design process is critical. Google Stitch uses natural language prompts to generate structural layouts that seamlessly bridge the gap between ideation and production. Let's break down how you can leverage Stitch to accelerate your UI design workflow.
           </p>
@@ -75,7 +45,7 @@ const StitchGuide = () => {
               <div className="flex justify-between items-end">
                 <div>
                   <h3 className="text-white text-2xl md:text-3xl font-bold mb-2">UI Design with Google Stitch Tutorial</h3>
-                  <p className="text-slate-300 font-medium">Travis Miller</p>
+                  <p className="text-slate-300 font-medium">Hasmat Patel</p>
                 </div>
                 <div className="hidden md:block">
                   <span className="bg-black/60 backdrop-blur text-white text-xs px-2 py-1 rounded font-mono">14:05</span>
@@ -291,3 +261,4 @@ const StitchGuide = () => {
 };
 
 export default StitchGuide;
+

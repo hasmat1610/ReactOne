@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Matter from 'matter-js';
-import { ArrowRight, Plus } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ArrowRight, Plus, Search } from 'lucide-react';
 
 const GUIDE_TAGS = [
-  // --- DESIGN TOOLS ---
+  // ... (keeping existing tags)
   { label: 'Figma', color: '#BEF226', textColor: '#000000' },
   { label: 'Sketch', color: '#BEF226', textColor: '#000000' },
   { label: 'Adobe XD', color: '#BEF226', textColor: '#000000' },
@@ -13,8 +14,6 @@ const GUIDE_TAGS = [
   { label: 'Lottie', color: '#FF57A7', textColor: '#FFFFFF' },
   { label: 'Spline', color: '#A259FF', textColor: '#FFFFFF' },
   { label: 'Cinema 4D', color: '#A259FF', textColor: '#FFFFFF' },
-  
-  // --- FRONTEND STACK ---
   { label: 'React', color: '#4CD8C0', textColor: '#000000' },
   { label: 'Next.js', color: '#4CD8C0', textColor: '#000000' },
   { label: 'Tailwind CSS', color: '#BEF226', textColor: '#000000' },
@@ -40,72 +39,85 @@ const GUIDE_TAGS = [
   { label: 'Webpack', color: '#FF57A7', textColor: '#FFFFFF' },
   { label: 'Jest', color: '#FFFFFF', textColor: '#000000' },
   { label: 'Playwright', color: '#FFFFFF', textColor: '#000000' },
-
-  // --- BACKEND STACK (New) ---
-  // 🏗 Backend Frameworks - Cyan
   { label: 'Node.js', color: '#4CD8C0', textColor: '#000000' },
   { label: 'Express.js', color: '#4CD8C0', textColor: '#000000' },
   { label: 'NestJS', color: '#4CD8C0', textColor: '#000000' },
-
-  // 🗄 Databases - Lime
   { label: 'PostgreSQL', color: '#BEF226', textColor: '#000000' },
   { label: 'MySQL', color: '#BEF226', textColor: '#000000' },
   { label: 'SQLite', color: '#BEF226', textColor: '#000000' },
   { label: 'MongoDB', color: '#BEF226', textColor: '#000000' },
   { label: 'Redis', color: '#BEF226', textColor: '#000000' },
-
-  // 🔗 API Technologies - Pink
   { label: 'REST API', color: '#FF57A7', textColor: '#FFFFFF' },
   { label: 'GraphQL', color: '#FF57A7', textColor: '#FFFFFF' },
   { label: 'tRPC', color: '#FF57A7', textColor: '#FFFFFF' },
   { label: 'gRPC', color: '#FF57A7', textColor: '#FFFFFF' },
-
-  // 🔐 Authentication & Security - Purple
   { label: 'JWT', color: '#A259FF', textColor: '#FFFFFF' },
   { label: 'OAuth 2.0', color: '#A259FF', textColor: '#FFFFFF' },
   { label: 'Auth0', color: '#A259FF', textColor: '#FFFFFF' },
   { label: 'Clerk', color: '#A259FF', textColor: '#FFFFFF' },
   { label: 'Supabase Auth', color: '#A259FF', textColor: '#FFFFFF' },
-
-  // 📡 Realtime & Messaging - White
   { label: 'WebSocket', color: '#FFFFFF', textColor: '#000000' },
   { label: 'Socket.IO', color: '#FFFFFF', textColor: '#000000' },
   { label: 'Firebase Realtime', color: '#FFFFFF', textColor: '#000000' },
-
-  // 🧩 Backend as a Service (BaaS) - Pink
   { label: 'Supabase', color: '#FF57A7', textColor: '#FFFFFF' },
   { label: 'Firebase', color: '#FF57A7', textColor: '#FFFFFF' },
   { label: 'Appwrite', color: '#FF57A7', textColor: '#FFFFFF' },
-
-  // 🧱 ORM / Database Tools - Lime
   { label: 'Prisma', color: '#BEF226', textColor: '#000000' },
   { label: 'TypeORM', color: '#BEF226', textColor: '#000000' },
   { label: 'Drizzle ORM', color: '#BEF226', textColor: '#000000' },
 ];
 
 const ExploreGuidesPhysics = () => {
+  const containerRef = useRef<HTMLElement>(null);
   const sceneRef = useRef<HTMLDivElement>(null);
   const engineRef = useRef<Matter.Engine | null>(null);
+  const runnerRef = useRef<Matter.Runner | null>(null);
+  const [isInView, setIsInView] = useState(false);
 
   useEffect(() => {
-    if (!sceneRef.current) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]) {
+          setIsInView(entries[0].isIntersecting);
+        }
+      },
+      { threshold: 0.1 }
+    );
 
-    // Matter.js Module Aliases
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!sceneRef.current || !isInView) {
+      if (runnerRef.current && engineRef.current) {
+        Matter.Runner.stop(runnerRef.current);
+      }
+      return;
+    };
+
+    if (engineRef.current && runnerRef.current) {
+      Matter.Runner.run(runnerRef.current, engineRef.current);
+      return;
+    }
+
     const { Engine, Render, Runner, Bodies, Composite, Mouse, MouseConstraint } = Matter;
 
-    // Create Engine
     const engine = Engine.create();
     engineRef.current = engine;
     const world = engine.world;
-
-    // Set gravity
     engine.gravity.y = 1.2;
 
-    // Get container dimensions
     const width = sceneRef.current.clientWidth;
     const height = sceneRef.current.clientHeight;
 
-    // Create Renderer
     const render = Render.create({
       element: sceneRef.current,
       engine: engine,
@@ -120,11 +132,10 @@ const ExploreGuidesPhysics = () => {
 
     Render.run(render);
 
-    // Create Runner
     const runner = Runner.create();
+    runnerRef.current = runner;
     Runner.run(runner, engine);
 
-    // Add boundaries (walls and ground)
     const wallOptions = { isStatic: true, render: { visible: false } };
     const ground = Bodies.rectangle(width / 2, height + 50, width, 100, wallOptions);
     const leftWall = Bodies.rectangle(-50, height / 2, 100, height, wallOptions);
@@ -133,34 +144,29 @@ const ExploreGuidesPhysics = () => {
 
     Composite.add(world, [ground, leftWall, rightWall, ceiling]);
 
-    // Add Tags as Bodies
     const tags = GUIDE_TAGS.map((tag) => {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
-      const pillHeight = 60; // 24px font + 12px padding top/bottom
-      const paddingX = 24; // 24px padding left/right
-      const pillY = 2; // Offset to account for stroke/glow
-      
+      const pillHeight = 48;
+      const paddingX = 20;
+      const pillY = 2;
+
       if (ctx) {
-        ctx.font = 'bold 24px';
-        ctx.fillText(tag.label, 0, 0);
+        ctx.font = 'bold 20px Inter';
         const textMetrics = ctx.measureText(tag.label);
         const textWidth = textMetrics.width;
-        
+
         const pillWidth = textWidth + paddingX * 2;
         canvas.width = pillWidth * window.devicePixelRatio;
         canvas.height = (pillHeight + pillY * 2) * window.devicePixelRatio;
-        
+
         ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-        
-        // Draw pill shape
         ctx.beginPath();
         ctx.roundRect(0, pillY, pillWidth, pillHeight, pillHeight / 2);
         ctx.fillStyle = tag.color;
         ctx.fill();
 
-        // Draw text
-        ctx.font = 'bold 24px'; 
+        ctx.font = 'bold 20px Inter';
         ctx.fillStyle = tag.textColor;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
@@ -169,8 +175,8 @@ const ExploreGuidesPhysics = () => {
 
       const x = Math.random() * (width - 200) + 100;
       const y = Math.random() * (height / 2);
-      
-      const body = Bodies.rectangle(x, y, (canvas.width / window.devicePixelRatio), pillHeight, {
+
+      return Bodies.rectangle(x, y, (canvas.width / window.devicePixelRatio), pillHeight, {
         chamfer: { radius: pillHeight / 2 },
         render: {
           sprite: {
@@ -184,38 +190,30 @@ const ExploreGuidesPhysics = () => {
         density: 0.01,
         angle: (Math.random() - 0.5) * 0.5
       });
-
-      return body;
     });
 
     Composite.add(world, tags);
 
-    // Add Mouse Control
     const mouse = Mouse.create(render.canvas);
     const mouseConstraint = MouseConstraint.create(engine, {
       mouse: mouse,
       constraint: {
         stiffness: 0.1,
-        render: {
-          visible: false
-        }
+        render: { visible: false }
       }
     });
 
     Composite.add(world, mouseConstraint);
     render.mouse = mouse;
 
-    // Handle Resize
     const handleResize = () => {
       if (!sceneRef.current) return;
       const newWidth = sceneRef.current.clientWidth;
       const newHeight = sceneRef.current.clientHeight;
-      
       render.canvas.width = newWidth;
       render.canvas.height = newHeight;
       render.options.width = newWidth;
       render.options.height = newHeight;
-      
       Matter.Body.setPosition(ground, { x: newWidth / 2, y: newHeight + 50 });
       Matter.Body.setPosition(rightWall, { x: newWidth + 50, y: newHeight / 2 });
     };
@@ -229,18 +227,73 @@ const ExploreGuidesPhysics = () => {
       Engine.clear(engine);
       render.canvas.remove();
       render.textures = {};
+      engineRef.current = null;
+      runnerRef.current = null;
     };
-  }, []);
+  }, [isInView]);
 
   return (
-    <section className="py-24 relative overflow-hidden bg-[#000000] flex flex-col justify-center">
-      {/* Physics Canvas Container */}
-        <div 
-          ref={sceneRef} 
-          className="w-full flex-1 min-h-[400px] relative overflow-hidden cursor-grab active:cursor-grabbing"
-        />
+    <section ref={containerRef} className="py-24 relative overflow-hidden bg-[#000000] flex flex-col justify-center">
+      {/* Background accents */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-[#216be4]/10 rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="container mx-auto px-4 relative z-10 max-w-6xl">
+        <div className="text-center mb-16 space-y-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#216be4]/30 bg-[#216be4]/10 text-[#216be4] mb-4 font-medium text-xs mx-auto"
+          >
+            <Search className="w-3.5 h-3.5" />
+            <span>Interactive Library</span>
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-4"
+          >
+            Explore Every <span className="text-transparent bg-clip-text bg-linear-to-r from-[#216be4] to-cyan-400">Essential Tech</span>
+          </motion.h2>
+        </div>
+
+        {/* Browser Mockup Wrapper */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="rounded-2xl border border-white/10 bg-[#0a0d14] shadow-2xl overflow-hidden ring-1 ring-white/5"
+        >
+          {/* Browser Header */}
+          <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5 bg-[#050505]">
+            <div className="flex gap-1.5">
+              <div className="w-3 h-3 rounded-full bg-rose-500/80" />
+              <div className="w-3 h-3 rounded-full bg-amber-500/80" />
+              <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
+            </div>
+            <div className="flex-1 flex justify-center">
+              <div className="px-32 py-1.5 rounded-md bg-white/5 border border-white/5 text-[11px] text-zinc-500 font-mono flex items-center justify-center">
+                reactone.dev/playground
+              </div>
+            </div>
+            <div className="w-12" />
+          </div>
+
+          {/* Content Area */}
+          <div className="min-h-[500px] bg-[#111111] relative overflow-hidden">
+            <div
+              ref={sceneRef}
+              className="w-full h-full absolute inset-0 cursor-grab active:cursor-grabbing"
+            />
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 };
 
+export default ExploreGuidesPhysics;
 export default ExploreGuidesPhysics;

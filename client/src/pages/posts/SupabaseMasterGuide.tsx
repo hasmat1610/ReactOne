@@ -31,6 +31,7 @@ import {
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
+import HeroBanner from '../../components/blog/HeroBanner';
 
 // Shared Types
 type Status = 'idle' | 'loading' | 'ok' | 'error';
@@ -146,54 +147,35 @@ const SupabaseMasterGuide = () => {
                 <meta name="description" content="Master Supabase for production: from scalable authentication and RLS policies to advanced AI-driven backend automation with MCP." />
             </Helmet>
 
-            <div className="container mx-auto px-4 max-w-4xl pt-32 pb-16">
-                {/* 1. Hero Section */}
-                <div className="w-full h-64 md:h-80 bg-gradient-to-br from-[#064E3B] via-[#059669]/20 to-[#080B16] rounded-3xl mb-10 overflow-hidden relative flex items-center justify-center border border-white/10 shadow-2xl">
-                    <div className="absolute inset-0 opacity-40 mix-blend-screen" style={{
-                        background: "radial-gradient(circle at 50% 120%, rgba(16, 185, 129, 0.4), transparent 50%), radial-gradient(circle at 10% 20%, rgba(52, 211, 153, 0.3), transparent 30%)"
-                    }}></div>
-                    <h1 className="text-4xl md:text-7xl font-extrabold text-white drop-shadow-2xl z-10 tracking-widest relative px-4 text-center leading-tight">
-                        <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 text-emerald-400">Supabase Master Guide</span>
-                    </h1>
-                </div>
+            {/* ── Hero Banner ── */}
+            <HeroBanner
+                badgeText="The Complete Backend Masterclass"
+                badgeIcon={Zap}
+                title="Supabase Master Guide"
+                subtitle="Building Scalable Full-Stack Apps with Supabase"
+                date="Updated Mar 12, 2026"
+                gradientContainer="from-[#064E3B] via-[#059669]/40 to-[#080B16]"
+                radialBackground="radial-gradient(circle at 50% 120%, rgba(16, 185, 129, 0.4), transparent 50%), radial-gradient(circle at 10% 20%, rgba(52, 211, 153, 0.3), transparent 30%)"
+                badgeContainerStyles="border border-emerald-500/30 bg-emerald-500/10"
+                badgeTextStyles="text-emerald-400"
+                titleGradient="from-white to-white/60 text-emerald-400"
+                subtitleColor="text-emerald-300/70"
+                avatarRing="from-emerald-400 to-blue-600"
+                dateColor="text-slate-400"
+            />
+
+            <div className="container mx-auto px-4 max-w-4xl pb-16">
 
                 <article className="prose prose-invert prose-lg max-w-none">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 mb-6 font-medium text-sm">
-                        <Zap className="w-4 h-4" />
-                        <span>The Complete Backend Masterclass</span>
-                    </div>
-
-                    <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight tracking-tight">
-                        Building Scalable Full-Stack Apps with Supabase
-                    </h1>
-
-                    {/* Status & Author Bio */}
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-6 mb-10 not-prose border-b border-white/5 pb-10">
-                        <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-400 to-blue-600 flex items-center justify-center p-[2px]">
-                                <div className="w-full h-full rounded-full bg-black flex items-center justify-center overflow-hidden border border-white/10">
-                                    <img src="https://i.pravatar.cc/150?img=33" alt="Author" className="w-full h-full object-cover" />
-                                </div>
-                            </div>
-                            <div>
-                                <div className="font-bold text-white text-base">Hasmat Patel</div>
-                                <div className="text-slate-400">Principal Engineer • ReactOne Engineering</div>
-                            </div>
-                        </div>
-                        <div className="sm:ml-auto flex flex-col items-end gap-2">
-                             <div className={`px-3 py-1 rounded-full border flex items-center gap-2 transition-colors ${
-                                status === 'ok' ? 'bg-emerald-500/5 border-emerald-500/20 text-emerald-400' : 
-                                status === 'error' ? 'bg-rose-500/5 border-rose-500/20 text-rose-400' :
-                                'bg-neutral-900 border-neutral-800 text-neutral-400'
-                            }`}>
-                                <Activity className={`w-3 h-3 ${status === 'loading' ? 'animate-spin' : ''}`} />
-                                <span className="text-[10px] font-bold uppercase tracking-wider">Status: {status}</span>
-                            </div>
-                            <div className="text-slate-500 text-xs flex items-center gap-4">
-                                <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> 15 min read</span>
-                                <div className="h-4 w-px bg-white/10"></div>
-                                <span>Updated Mar 12, 2026</span>
-                            </div>
+                    {/* Status Pill */}
+                    <div className="flex justify-end mb-8 not-prose">
+                        <div className={`px-3 py-1 rounded-full border flex items-center gap-2 transition-colors ${
+                            status === 'ok' ? 'bg-emerald-500/5 border-emerald-500/20 text-emerald-400' : 
+                            status === 'error' ? 'bg-rose-500/5 border-rose-500/20 text-rose-400' :
+                            'bg-neutral-900 border-neutral-800 text-neutral-400'
+                        }`}>
+                            <Activity className={`w-3 h-3 ${status === 'loading' ? 'animate-spin' : ''}`} />
+                            <span className="text-[10px] font-bold uppercase tracking-wider">Status: {status}</span>
                         </div>
                     </div>
 
@@ -706,3 +688,4 @@ function shieldCheckIcon() {
 }
 
 export default SupabaseMasterGuide;
+

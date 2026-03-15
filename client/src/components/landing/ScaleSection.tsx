@@ -97,37 +97,6 @@ const ScaleSection = () => {
                     })}
                 </div>
 
-                {/* Tech Logos Row */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                >
-                    <p className="text-center text-zinc-500 text-sm font-medium mb-8 uppercase tracking-widest">Powered By</p>
-                    <div className="flex items-center justify-center gap-10 flex-wrap">
-                        {techLogos.map((logo) => (
-                            <div key={logo.name} className="flex flex-col items-center gap-2 opacity-50 hover:opacity-80 transition-opacity">
-                                {logo.svg}
-                                <span className="text-[10px] text-zinc-500 font-mono">{logo.name}</span>
-                            </div>
-                        ))}
-                    </div>
-                </motion.div>
-
-                {/* CTA */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mt-16"
-                >
-                    <Link
-                        to="/signup"
-                        className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#216be4] hover:bg-blue-500 text-white font-semibold transition-all shadow-[0_0_20px_rgba(33,107,228,0.3)] hover:shadow-[0_0_30px_rgba(33,107,228,0.5)] no-underline"
-                    >
-                        Start Learning for Free <ArrowRight className="w-5 h-5" />
-                    </Link>
-                </motion.div>
             </div>
         </section>
     );
